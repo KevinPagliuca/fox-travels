@@ -8,7 +8,6 @@ import { Scroll } from 'components/Scroll';
 import { Bookmarks, Gear, Layout, Ticket, SignOut } from 'phosphor-react';
 import { useAuthStore } from 'store/Auth.store';
 
-import { ISidebarProps } from './Sidebar.interfaces';
 import * as S from './Sidebar.styles';
 
 const navigationItems = [
@@ -34,7 +33,7 @@ const navigationItems = [
   },
 ];
 
-export const Sidebar = ({}: ISidebarProps) => {
+export const Sidebar = () => {
   const { pathname } = useRouter();
   const handleLogout = useAuthStore((state) => state.handleLogout);
 

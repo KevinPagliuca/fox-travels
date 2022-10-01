@@ -1,5 +1,4 @@
 import { breakpoints } from 'shared/breakpoints';
-import { PAGE_MAX_WIDTH } from 'shared/constants';
 import styled from 'styled-components';
 
 export const HomeContentContainer = styled.div`

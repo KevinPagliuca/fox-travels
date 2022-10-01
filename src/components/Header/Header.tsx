@@ -3,10 +3,9 @@ import React from 'react';
 import { Avatar } from 'components/Avatar';
 import { Bell, MagnifyingGlass } from 'phosphor-react';
 
-import type { IHeaderProps } from './Header.interfaces';
 import * as S from './Header.styles';
 
-export const Header = ({}: IHeaderProps) => {
+export const Header = () => {
   return (
     <S.HeaderContainer>
       <S.HeaderContent>
