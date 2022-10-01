@@ -36,28 +36,37 @@ export const NavigationList = styled.div`
 export const NavigationItem = styled.div<NavigationItemAttributes>`
   ${({ theme, isActive }) => css`
     display: flex;
-    align-items: center;
-    width: 100%;
+    flex: 1;
 
-    background: ${isActive ? theme.colors.primary : 'transparent'};
-    color: ${isActive ? theme.colors.tertiary : theme.colors.body};
+    a {
+      display: flex;
+      align-items: center;
+      width: 100%;
 
-    gap: 1.25rem;
-    padding: 0.75rem 0.25rem 0.75rem 1.25rem;
+      background: ${isActive ? theme.colors.primary : 'transparent'};
+      color: ${isActive ? theme.colors.tertiary : theme.colors.body};
 
-    border-radius: 13px;
+      gap: 1.25rem;
+      padding: 0.75rem 0.25rem 0.75rem 1.25rem;
 
-    cursor: pointer;
+      border-radius: 13px;
 
-    font-size: 0.875rem;
-    font-weight: ${isActive ? 700 : 400};
-    white-space: nowrap;
+      cursor: pointer;
 
-    transition: background 0.2s ease-in-out;
+      font-size: 0.875rem;
+      font-weight: ${isActive ? 700 : 400};
+      white-space: nowrap;
 
-    &:hover {
-      background: ${theme.colors.primary};
-      color: ${theme.colors.black};
+      transition: background 0.2s ease-in-out;
+
+      &:hover {
+        background: ${theme.colors.primary};
+        color: ${theme.colors.black};
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 2px ${isActive ? theme.colors.secondary : theme.colors.primary};
+      }
     }
   `}
 `;

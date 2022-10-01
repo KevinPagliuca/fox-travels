@@ -1,15 +1,26 @@
 import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
+
+const MotionTabContent = motion(TabsPrimitive.Content);
 
 export const TabsContainer = styled(TabsPrimitive.Root)`
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const TabsOptionsContainer = styled(TabsPrimitive.List)`
   display: flex;
   gap: 2rem;
   margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  &[data-state='active'] {
+    background: ${({ theme }) => theme.colors.title};
+  }
 `;
 
 export const TabOption = styled(TabsPrimitive.Trigger)`
@@ -19,17 +30,26 @@ export const TabOption = styled(TabsPrimitive.Trigger)`
     color: ${theme.colors.body};
     border: 0;
     background: transparent;
-    transition: color,
-      filter ${theme.transitions.speeds.default} ${theme.transitions.easings.default};
+
+    border-bottom: 2px solid transparent;
+    transition: ${theme.transitions.preset.default};
 
     &[data-state='active'] {
       color: ${theme.colors.title};
     }
+
+    &:focus {
+      box-shadow: none;
+      border-bottom: 2px solid ${theme.colors.primary};
+    }
   `}
 `;
 
-export const TabContent = styled(TabsPrimitive.Content)`
+export const TabContent = styled(MotionTabContent)`
   display: flex;
   flex-direction: column;
-  flex: 1;
+
+  &:focus {
+    box-shadow: none;
+  }
 `;

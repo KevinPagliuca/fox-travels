@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface IDefaultDashboardLayoutProps {
+export interface IDefaultLayoutProps {
   children: ReactNode;
   contentHeader?: ReactNode;
 }

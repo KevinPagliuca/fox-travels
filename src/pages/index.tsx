@@ -2,14 +2,15 @@ import type { NextPage } from 'next';
 
 import { Header } from 'components/Header';
 import { HomeContent } from 'contents/Home/Home';
-import { DefaultDashboardLayout } from 'layouts';
+import { withAuth } from 'HOC/withAuth';
+import { DefaultLayout } from 'layouts';
 
 const Home: NextPage = () => {
   return (
-    <DefaultDashboardLayout contentHeader={<Header />}>
+    <DefaultLayout contentHeader={<Header />}>
       <HomeContent />
-    </DefaultDashboardLayout>
+    </DefaultLayout>
   );
 };
 
-export default Home;
+export default withAuth(Home);

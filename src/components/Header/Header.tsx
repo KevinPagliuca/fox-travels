@@ -3,7 +3,7 @@ import React from 'react';
 import { Avatar } from 'components/Avatar';
 import { Bell, MagnifyingGlass } from 'phosphor-react';
 
-import { IHeaderProps } from './Header.interfaces';
+import type { IHeaderProps } from './Header.interfaces';
 import * as S from './Header.styles';
 
 export const Header = ({}: IHeaderProps) => {

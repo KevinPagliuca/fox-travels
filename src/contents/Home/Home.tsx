@@ -9,12 +9,12 @@ import * as S from './Home.styles';
 export const HomeContent = () => {
   const tabOptions: TabsOptionsType[] = [
     {
-      id: 1,
+      key: 'most-popular',
       title: 'Mais populares',
       content: <div>Conteúdo 1</div>,
     },
     {
-      id: 2,
+      key: 'offers',
       title: 'Ofertas',
       content: <div>Conteúdo 2</div>,
     },

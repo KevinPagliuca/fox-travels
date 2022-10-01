@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import { Scroll } from 'components/Scroll';
 import { Bookmarks, Gear, Layout, Ticket, SignOut } from 'phosphor-react';
+import { useAuthStore } from 'store/Auth.store';
 
 import { ISidebarProps } from './Sidebar.interfaces';
 import * as S from './Sidebar.styles';
@@ -35,6 +36,7 @@ const navigationItems = [
 
 export const Sidebar = ({}: ISidebarProps) => {
   const { pathname } = useRouter();
+  const handleLogout = useAuthStore((state) => state.handleLogout);
 
   return (
     <S.SidebarContainer>
@@ -46,10 +48,12 @@ export const Sidebar = ({}: ISidebarProps) => {
         <Scroll verticallOffset={4}>
           <S.NavigationList>
             {navigationItems.map((item) => (
-              <S.NavigationItem key={item.name} isActive={item.href === pathname}>
-                {item.icon}
+              <S.NavigationItem key={item.name} isActive={item.href === pathname} tabIndex={-1}>
                 <Link href={item.href}>
-                  <a>{item.name}</a>
+                  <a tabIndex={0}>
+                    {item.icon}
+                    {item.name}
+                  </a>
                 </Link>
               </S.NavigationItem>
             ))}
@@ -58,7 +62,7 @@ export const Sidebar = ({}: ISidebarProps) => {
       </S.SidebarContent>
 
       <S.SidebarFooter>
-        <S.LogoutButton>
+        <S.LogoutButton type="button" onClick={handleLogout}>
           <SignOut size={24} />
           Deslogar
         </S.LogoutButton>

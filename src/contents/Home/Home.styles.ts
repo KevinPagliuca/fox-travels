@@ -1,3 +1,5 @@
+import { breakpoints } from 'shared/breakpoints';
+import { PAGE_MAX_WIDTH } from 'shared/constants';
 import styled from 'styled-components';
 
 export const HomeContentContainer = styled.div`
@@ -60,11 +62,11 @@ export const EasyVisaContent = styled.div`
   width: 100%;
   gap: 1rem;
 
-  @media (max-width: 1200px) {
+  @media (max-width: ${breakpoints.desktop}) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 936px) {
+  @media (max-width: ${breakpoints.mediumDesktop}) {
     display: flex;
     flex-direction: column;
     justify-content: center;

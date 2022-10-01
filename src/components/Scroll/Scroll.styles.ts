@@ -13,8 +13,9 @@ export const ScrollArea = styled(ScrollAreaPrimitive.Root)`
 export const ScrollAreaViewport = styled(ScrollAreaPrimitive.Viewport)<ScrollAreaViewportProps>`
   width: 100%;
   height: 100%;
-  padding: 4px;
-  margin: -2px;
+  padding: 0 4px;
+  margin: 0 -2px;
+  flex: 1;
 `;
 
 export const ScrollAreaScrollbar = styled(ScrollAreaPrimitive.Scrollbar)`
@@ -22,7 +23,7 @@ export const ScrollAreaScrollbar = styled(ScrollAreaPrimitive.Scrollbar)`
   justify-content: center;
   user-select: none;
   touch-action: none;
-  padding: ${SCROLLBAR_SIZE / 4}px;
+  padding: 0 ${SCROLLBAR_SIZE / 4}px;
   background: rgba(0, 0, 0, 0.25);
   border-radius: ${SCROLLBAR_SIZE / 2}px;
   transition: background 0.2s ease-out;

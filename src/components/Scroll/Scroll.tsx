@@ -11,16 +11,28 @@ export const Scroll = ({
   viewportProps,
   hideHorizontalScrollbar,
   hideVerticalScrollbar,
-  verticallOffset,
-  horizontalOffset,
+  verticallOffset = 0,
+  horizontalOffset = 0,
 }: IScrollProps) => {
+  const paddingRight = SCROLLBAR_SIZE + verticallOffset;
+  const paddingBottom = SCROLLBAR_SIZE + horizontalOffset;
+
+  const marginRight = -(paddingRight / 2);
+  const marginBottom = -(paddingBottom / 2);
+
+  const paddingLeft = Math.abs(marginRight);
+
   return (
     <S.ScrollArea type={rootProps?.type ?? 'auto'} {...rootProps}>
       <S.ScrollAreaViewport
         {...viewportProps}
         style={{
-          paddingRight: SCROLLBAR_SIZE + (verticallOffset ?? 0),
-          paddingBottom: SCROLLBAR_SIZE + (horizontalOffset ?? 0),
+          ...viewportProps?.style,
+          paddingRight: !hideVerticalScrollbar ? paddingRight : 0,
+          paddingBottom: !hideHorizontalScrollbar ? paddingBottom : 0,
+          paddingLeft: !hideVerticalScrollbar ? paddingLeft : 0,
+          marginRight: !hideVerticalScrollbar ? marginRight : 0,
+          marginBottom: !hideHorizontalScrollbar ? marginBottom : 0,
         }}
       >
         {children}

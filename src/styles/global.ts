@@ -7,16 +7,27 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: ${({ theme }) => theme.fonts.base};
   }
 
   body {
     background: ${({ theme }) => theme.colors.tertiary};
     color: ${({ theme }) => theme.colors.body};
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus {
+    outline: none;
+    box-shadow: 0 0 0px 2px  ${({ theme }) => theme.colors.primary};
   }
   
   button {
     cursor: pointer;
+  }
+
+  body, input, textarea, button {
+    font-weight: 400;
+    font-size: 1rem;
+    font-family: ${({ theme }) => theme.fonts.base};
   }
 
   a {
@@ -24,6 +35,8 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     color: inherit;
   }
+
+ 
 
   @media (max-width: 1080px) {
     html {

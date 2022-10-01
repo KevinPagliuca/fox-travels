@@ -51,7 +51,18 @@ export const SearchInput = styled.input`
   outline: 0;
   font-size: 1rem;
   padding-right: 1rem;
+  color: ${({ theme }) => theme.colors.body};
   text-overflow: ellipsis;
+  transition: ${({ theme }) => theme.transitions.preset.default};
+
+  &::placeholder {
+    color: inherit;
+  }
+
+  &:focus {
+    color: ${({ theme }) => theme.colors.primary};
+    box-shadow: none;
+  }
 `;
 
 export const SearchButton = styled.button`
@@ -64,14 +75,14 @@ export const SearchButton = styled.button`
   font-weight: 700;
   border-radius: 14px;
   transition: ${({ theme }) => theme.transitions.preset.default};
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.primary_dark};
-  }
+  border: 4px solid transparent;
 
   &:active,
+  &:hover,
   &:focus {
     background: ${({ theme }) => theme.colors.primary_dark};
+    border-color: ${({ theme }) => theme.colors.secondary};
+    box-shadow: none;
   }
 `;
 
