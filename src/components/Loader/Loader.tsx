@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { AppLogo } from 'assets/AppLogo';
+import { AppLoading } from 'assets/AppLoading';
 
 import * as S from './styles';
 
 export const Loader = () => {
   return (
     <S.Container>
-      <AppLogo />
+      <AppLoading />
     </S.Container>
   );
 };
