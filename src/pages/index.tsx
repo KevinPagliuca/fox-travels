@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 
 import { Header } from 'components/Header';
-import { HomeContent } from 'contents/Home/Home';
+import { HomeContent } from 'contents/Home';
 import { withAuth } from 'HOC/withAuth';
 import { DefaultLayout } from 'layouts';
 
