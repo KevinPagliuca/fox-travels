@@ -10,7 +10,9 @@ export const Header = () => {
     <S.HeaderContainer>
       <S.HeaderContent>
         <S.HeaderSearchBox>
-          <MagnifyingGlass size={24} className="svg-transition" />
+          <S.HeaderIconWrapper>
+            <MagnifyingGlass size={24} className="svg-transition" />
+          </S.HeaderIconWrapper>
           <S.SearchInput placeholder="Pesquise seu destino..." />
           <S.SearchButton>Pesquisar</S.SearchButton>
         </S.HeaderSearchBox>

@@ -1,8 +1,15 @@
+export const breakpointsValues = {
+  desktop: 1300,
+  mediumDesktop: 1000,
+  tablet: 800,
+  mobile: 600,
+  smallMobile: 480,
+} as const;
+
 export const breakpoints = {
-  desktop: '1300px',
-  mediumDesktop: '948px',
-  smallDesktop: '800px',
-  tablet: '768px',
-  mobile: '548px',
-  smallMobile: '480px',
+  desktop: `${breakpointsValues.desktop}px`,
+  mediumDesktop: `${breakpointsValues.mediumDesktop}px`,
+  tablet: `${breakpointsValues.tablet}px`,
+  mobile: `${breakpointsValues.mobile}px`,
+  smallMobile: `${breakpointsValues.smallMobile}px`,
 } as const;

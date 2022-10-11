@@ -18,6 +18,10 @@ export const TabsOptionsContainer = styled(TabsPrimitive.List)`
   top: 0;
   left: 0;
 
+  &:focus {
+    box-shadow: none;
+  }
+
   &[data-state='active'] {
     background: ${({ theme }) => theme.colors.title};
   }

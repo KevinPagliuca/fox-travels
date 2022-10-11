@@ -33,8 +33,13 @@ export const LayoutContent = styled.div`
     display: flex;
     overflow: hidden;
     flex: 1;
+    position: relative;
 
     width: 100%;
     gap: 1rem;
+
+    @media (max-width: ${breakpoints.mediumDesktop}) {
+      flex-direction: column;
+    }
   `}
 `;

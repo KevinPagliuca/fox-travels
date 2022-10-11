@@ -1,6 +1,14 @@
+import { List } from 'phosphor-react';
+import { breakpoints } from 'shared/breakpoints';
 import styled, { css } from 'styled-components';
 
 import { NavigationItemAttributes } from './Sidebar.interfaces';
+
+const hideContent = css`
+  @media (max-width: ${breakpoints.mediumDesktop}) {
+    display: none;
+  }
+`;
 
 export const SidebarContainer = styled.aside`
   display: flex;
@@ -10,13 +18,58 @@ export const SidebarContainer = styled.aside`
   overflow: hidden;
   height: 100%;
   gap: 3rem;
+
+  @media (max-width: ${breakpoints.mediumDesktop}) {
+    padding: unset;
+    width: unset;
+    overflow: unset;
+    height: fit-content;
+    padding: 1rem 1.5rem 0.5rem;
+  }
 `;
 
-export const SidebarHeader = styled.div`
+export const SidebarIcon = styled(List)``;
+
+export const SidebarHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+
+  > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid transparent;
+    transition: ${({ theme }) => theme.transitions.preset.default};
+
+    &:focus {
+      box-shadow: none;
+      border-bottom: 3px solid ${({ theme }) => theme.colors.primary};
+    }
+  }
+
+  .sibarTriggerButton {
+    display: none;
+    background: none;
+    border: 0;
+    color: ${({ theme }) => theme.colors.title};
+    line-height: 0;
+    border-radius: 8px;
+  }
+
+  @media (max-width: ${breakpoints.mediumDesktop}) {
+    justify-content: space-between;
+
+    .sibarTriggerButton {
+      display: block;
+      transition: ${({ theme }) => theme.transitions.preset.default};
+
+      &:hover,
+      &:focus {
+        color: ${({ theme }) => theme.colors.primary};
+      }
+    }
+  }
 `;
 
 export const SidebarContent = styled.div`
@@ -24,6 +77,8 @@ export const SidebarContent = styled.div`
   flex-direction: column;
   overflow-y: auto;
   height: 100%;
+
+  ${hideContent};
 `;
 
 export const NavigationList = styled.div`
@@ -31,12 +86,17 @@ export const NavigationList = styled.div`
   flex-direction: column;
   gap: 2rem;
   height: 100%;
+
+  /* @media (max-width: ${breakpoints.mediumDesktop}) {
+    flex-direction: row;
+  } */
 `;
 
 export const NavigationItem = styled.div<NavigationItemAttributes>`
   ${({ theme, isActive }) => css`
     display: flex;
-    flex: 1;
+    align-items: center;
+    justify-content: center;
 
     a {
       display: flex;
@@ -68,6 +128,20 @@ export const NavigationItem = styled.div<NavigationItemAttributes>`
         box-shadow: 0 0 0 2px ${isActive ? theme.colors.secondary : theme.colors.primary};
       }
     }
+
+    /* @media (max-width: ${breakpoints.mediumDesktop}) {
+      grid-area: logout;
+
+      a {
+        padding: 0.5rem;
+        gap: 0;
+        justify-content: center;
+      }
+
+      span {
+        display: none;
+      }
+    } */
   `}
 `;
 
@@ -78,6 +152,7 @@ export const SidebarFooter = styled.footer`
   flex-direction: column;
   gap: 2rem;
   margin-top: auto;
+  ${hideContent};
 `;
 
 export const LogoutButton = styled.button`
@@ -103,5 +178,14 @@ export const LogoutButton = styled.button`
 
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
+  }
+
+  @media (max-width: ${breakpoints.mediumDesktop}) {
+    flex-direction: row;
+    padding: 0.5rem;
+
+    span {
+      display: none;
+    }
   }
 `;

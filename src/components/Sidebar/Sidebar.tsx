@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Scroll } from 'components/Scroll';
+import { SidebarDrawer } from 'components/SidebarDrawer';
 import { Bookmarks, Gear, Layout, Ticket, SignOut } from 'phosphor-react';
 import { useAuthStore } from 'store/Auth.store';
 
@@ -34,13 +35,29 @@ const navigationItems = [
 ];
 
 export const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useRouter();
   const handleLogout = useAuthStore((state) => state.handleLogout);
+
+  const onOpenChange = useCallback((isOpen: boolean) => {
+    setIsOpen(isOpen);
+  }, []);
 
   return (
     <S.SidebarContainer>
       <S.SidebarHeader>
-        <Image src={`/green-logo-with-name.svg`} alt="Fox Travels Logo" width={132} height={48} />
+        <Link href="/" passHref tabIndex={0}>
+          <a>
+            <Image src="/green-logo-with-name.svg" alt="Fox Travels Logo" width={132} height={48} />
+          </a>
+        </Link>
+        <SidebarDrawer
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          triggerClassName="sibarTriggerButton"
+        >
+          <S.SidebarIcon size={32} />
+        </SidebarDrawer>
       </S.SidebarHeader>
 
       <S.SidebarContent>
@@ -51,7 +68,7 @@ export const Sidebar = () => {
                 <Link href={item.href}>
                   <a tabIndex={0}>
                     {item.icon}
-                    {item.name}
+                    <span>{item.name}</span>
                   </a>
                 </Link>
               </S.NavigationItem>
@@ -63,7 +80,7 @@ export const Sidebar = () => {
       <S.SidebarFooter>
         <S.LogoutButton type="button" onClick={handleLogout}>
           <SignOut size={24} />
-          Deslogar
+          <span>Deslogar</span>
         </S.LogoutButton>
       </S.SidebarFooter>
     </S.SidebarContainer>
