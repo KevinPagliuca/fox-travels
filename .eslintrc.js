@@ -5,6 +5,7 @@ module.exports = {
   ...config,
   rules: {
     ...config.rules,
-    'import/no-cycle': ['warn', { maxDepth: 1 }],
+    'react-hooks/exhaustive-deps': 'off',
+    'react/display-name': 'off',
   },
 };

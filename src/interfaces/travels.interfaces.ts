@@ -1,4 +1,4 @@
-import { IDestination } from './destinations.interface';
+import { IDestination } from './destinations.interfaces';
 
 export type TravelPriceType =
   | {

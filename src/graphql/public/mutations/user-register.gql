@@ -1,0 +1,17 @@
+type CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+mutation UserRegister($data: CreateUserInput!) {
+  createUser(data: $data) {
+    user {
+      id
+      name
+      email
+    }
+    token
+  }
+}

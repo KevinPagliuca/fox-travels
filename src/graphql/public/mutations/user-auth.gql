@@ -1,0 +1,15 @@
+type LoginUserInput {
+  email: String!
+  password: String!
+}
+
+mutation AuthUser($userData: LoginUserInput!) {
+  loginUser(data: $userData) {
+    token
+    user {
+      id
+      email
+      name
+    }
+  }
+}

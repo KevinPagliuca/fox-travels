@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { Scroll } from 'components/Scroll';
 import { SidebarDrawer } from 'components/SidebarDrawer';
 import { Bookmarks, Gear, Layout, Ticket, SignOut } from 'phosphor-react';
-import { useAuthStore } from 'store/Auth.store';
+import { useAuthStore } from 'store/Authentication/Auth.store';
 
 import * as S from './Sidebar.styles';
 

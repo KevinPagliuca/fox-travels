@@ -4,8 +4,9 @@ import { Header } from 'components/Header';
 import { HomeContent } from 'contents/Home';
 import { withAuth } from 'HOC/withAuth';
 import { DefaultLayout } from 'layouts';
+import { withApollo } from 'lib/withApollo';
 
-const Home: NextPage = () => {
+const Dashboard: NextPage = () => {
   return (
     <DefaultLayout contentHeader={<Header />}>
       <HomeContent />
@@ -13,4 +14,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default withAuth(Home);
+export default withApollo(withAuth(Dashboard));

@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 
   :focus {
     outline: none;
-    box-shadow: 0 0 0px 2px  ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 0 2px  ${({ theme }) => theme.colors.primary};
   }
   
   button {

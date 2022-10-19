@@ -1,13 +1,7 @@
+import { loginTabOptionsKeys, TabOptionsKeysType } from 'contents/Auth/tabOptions';
 import create from 'zustand';
 
-import { loginTabOptionsKeys, TabOptionsKeysType } from '../shared/tabOptions';
-
-interface ILoginPageStore {
-  selectedTab: TabOptionsKeysType;
-  setSelectedTab: (tab: TabOptionsKeysType) => void;
-  handleRegister: () => void;
-  handleLogin: () => void;
-}
+import { ILoginPageStore } from './loginPageStore.interfaces';
 
 export const useLoginPageStore = create<ILoginPageStore>((set) => ({
   selectedTab: loginTabOptionsKeys.login,

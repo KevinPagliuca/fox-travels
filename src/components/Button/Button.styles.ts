@@ -1,38 +1,59 @@
-import styled from 'styled-components';
+import { ThreeDots } from 'react-loader-spinner';
 
-import { ButtonVariantType } from './Button.interface';
+import styled, { css } from 'styled-components';
 
-const DefaultButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: 0;
-  outline: 0;
+import { ButtonAttributes, ButtonVariantType } from './Button.interface';
 
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: ${({ theme }) => theme.fonts.secondary};
-  transition: ${({ theme }) => theme.transitions.preset.default};
+const DefaultButton = styled.button<ButtonAttributes>`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1rem;
+    border-radius: 4px;
+    border: 0;
+    outline: 0;
+    max-height: 2.5rem;
+    height: 100%;
+
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: ${theme.fonts.secondary};
+    transition: ${theme.transitions.preset.default};
+
+    &:disabled {
+      cursor: not-allowed !important;
+      opacity: 0.8;
+    }
+
+    .buttonLoader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 60%;
+        height: 60%;
+      }
+    }
+  `}
 `;
 
 const PrimaryButton = styled(DefaultButton)`
-  color: ${({ theme }) => theme.colors.dark_blue};
-  background: ${({ theme }) => theme.colors.primary};
+  ${({ theme }) => css`
+    color: ${theme.colors.dark_blue};
+    background: ${theme.colors.primary};
 
-  &:active,
-  &:hover {
-    background: ${({ theme }) => theme.colors.primary_dark};
-    color: ${({ theme }) => theme.colors.dark_blue};
-  }
+    &:not(:disabled):hover,
+    &:not(:disabled):active {
+      background: ${theme.colors.primary_dark};
+      color: ${theme.colors.dark_blue};
+    }
 
-  &:focus {
-    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.secondary_light};
-    /* box-shadow: none; */
-    /* outline: 2px solid ${({ theme }) => theme.colors.secondary};
-    outline-offset: 2px; */
-  }
+    &:not(:disabled):focus {
+      box-shadow: inset 0 0 0 2px ${theme.colors.secondary_light};
+    }
+  `}
 `;
 
 const SecondaryButton = styled(DefaultButton)`
@@ -45,10 +66,10 @@ const TertiaryButton = styled(DefaultButton)`
   background: ${({ theme }) => theme.colors.tertiary};
 `;
 
-const Buttons: Record<ButtonVariantType, typeof DefaultButton> = {
+export const Buttons: Record<ButtonVariantType, typeof DefaultButton> = {
   primary: PrimaryButton,
   secondary: SecondaryButton,
   tertiary: TertiaryButton,
 };
 
-export default Buttons;
+export const LoaderStyled = styled(ThreeDots)``;

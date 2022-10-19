@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import type { NextPage } from 'next';
 
 import { Loader } from 'components/Loader';
+import { useMe } from 'graphql/generated/page';
 import AuthPage from 'pages/auth';
-import { useAuthStore } from 'store/Auth.store';
+import { useAuthStore } from 'store/Authentication/Auth.store';
+
+import { withApollo } from '../lib/withApollo';
 
 export function withAuth(Component: NextPage) {
   const Auth: NextPage = (props) => {
-    const { isAutenticated } = useAuthStore();
-    const [loading, setLoading] = useState(true);
+    const { data, loading } = useMe();
+    const { isAutenticated, updateSession } = useAuthStore();
 
     useEffect(() => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
-    }, []);
+      if (data?.me) updateSession(data.me);
+    }, [data]);
 
     if (loading) return <Loader />;
 
@@ -26,5 +27,5 @@ export function withAuth(Component: NextPage) {
     return <Component {...props} />;
   };
 
-  return Auth;
+  return withApollo(Auth);
 }

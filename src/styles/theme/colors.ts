@@ -5,6 +5,10 @@ const commonColors = {
   black: '#000000',
   primary: '#D1F366',
   secondary: '#EC502C',
+
+  error: '#D21F3C',
+  success: '#0E8A16',
+  warning: '#F5A623',
 } as const;
 
 export const colors = {

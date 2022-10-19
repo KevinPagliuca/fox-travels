@@ -5,7 +5,7 @@ import type { IInputProps } from './Input.interfaces';
 import * as S from './Input.styles';
 
 const InputComponent: FFR<HTMLInputElement, IInputProps> = (
-  { name, label, control, ...rest },
+  { name, label, control, error, ...rest },
   originalRef
 ) => {
   return (
@@ -16,21 +16,26 @@ const InputComponent: FFR<HTMLInputElement, IInputProps> = (
           name={name}
           control={control}
           defaultValue={rest?.defaultValue ?? ''}
-          render={({ field: { name, onBlur, onChange, ref, value } }) => (
-            <S.InputField
-              id={name}
-              value={value}
-              name={name}
-              onBlur={onBlur}
-              onChange={onChange}
-              ref={() => ref(originalRef)}
-              {...rest}
-            />
-          )}
+          render={({ field: { name, onBlur, onChange, ref, value } }) => {
+            return (
+              <S.InputField
+                id={name}
+                value={value}
+                name={name}
+                onBlur={onBlur}
+                onChange={onChange}
+                ref={ref}
+                hasValue={!!value}
+                hasError={!!error}
+                {...rest}
+              />
+            );
+          }}
         />
       ) : (
         <S.InputField id={name} name={name} ref={originalRef} {...rest} />
       )}
+      {error && <S.InputError>{error.message}</S.InputError>}
     </S.InputContainer>
   );
 };

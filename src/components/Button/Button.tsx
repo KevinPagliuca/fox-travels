@@ -1,16 +1,21 @@
 import React, { forwardRef, ForwardRefRenderFunction as FFR } from 'react';
 
 import type { IButtonProps } from './Button.interface';
-import Buttons from './Button.styles';
+import { Buttons, LoaderStyled } from './Button.styles';
 
 const ButtonComponent: FFR<HTMLButtonElement, IButtonProps> = (
-  { children, variant = 'primary', ...rest },
+  { children, variant = 'primary', isLoading = false, ...rest },
   ref
 ) => {
   const ButtonComponent = Buttons[variant];
   return (
-    <ButtonComponent {...rest} ref={ref}>
-      {children}
+    <ButtonComponent
+      {...rest}
+      isLoading={isLoading}
+      disabled={isLoading || rest?.disabled}
+      ref={ref}
+    >
+      {isLoading ? <LoaderStyled color="currentColor" wrapperClass="buttonLoader" /> : children}
     </ButtonComponent>
   );
 };
