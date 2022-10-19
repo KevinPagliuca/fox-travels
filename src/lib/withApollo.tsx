@@ -10,7 +10,7 @@ import {
 } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
 import { parseCookies } from 'nookies';
-import { APP_USER_TOKEN } from 'shared/constants';
+import { API_URL, APP_USER_TOKEN } from 'shared/constants';
 
 export function withApollo(Component: NextPage) {
   return function Provider(props: any) {
@@ -28,7 +28,7 @@ export function getApolloClient(ctx?: ApolloClientContext, ssrCache?: Normalized
   const { [APP_USER_TOKEN]: token } = parseCookies(ctx);
 
   const httpLink = createHttpLink({
-    uri: 'http://localhost:3333/graphql',
+    uri: API_URL,
     headers: {
       authorization: token ?? '',
     },

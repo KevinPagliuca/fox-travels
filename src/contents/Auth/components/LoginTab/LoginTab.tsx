@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { GraphQLError } from 'graphql';
-import { useAuthUserMutation } from 'graphql/generated/graphql';
+import { useAuthUserMutation } from 'graphql/generated/graphql.generated';
 import type { LoginFormDataType } from 'interfaces';
 import { setCookie } from 'nookies';
 import { usersService } from 'services/user/users.service';

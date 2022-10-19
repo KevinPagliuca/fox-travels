@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import type { NextPage } from 'next';
 
 import { Loader } from 'components/Loader';
-import { useMe } from 'graphql/generated/page';
+import { useMe } from 'graphql/generated/page.generated';
 import AuthPage from 'pages/auth';
 import { useAuthStore } from 'store/Authentication/Auth.store';
 

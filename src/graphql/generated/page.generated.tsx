@@ -1,14 +1,13 @@
-import type React from 'react';
+/* eslint-disable */
+import * as Types from './graphql.generated';
 
+import * as Operations from './graphql.generated';
 import { NextPage } from 'next';
 import { NextRouter, useRouter } from 'next/router';
-
 import { QueryHookOptions, useQuery } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-
+import type React from 'react';
 import { getApolloClient, ApolloClientContext } from '../../lib/withApollo';
-import * as Operations from './graphql';
-import * as Types from './graphql';
 export async function getServerPageMe(
   options: Omit<Apollo.QueryOptions<Types.MeQueryVariables>, 'query'>,
   ctx: ApolloClientContext

@@ -1,10 +1,15 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 
+import { API_URL } from './src/shared/constants';
+
 const config: CodegenConfig = {
-  schema: 'http://localhost:3333/graphql',
+  schema: API_URL,
   overwrite: true,
+  hooks: {
+    afterAllFileWrite: ['eslint --fix'],
+  },
   generates: {
-    './src/graphql/generated/graphql.tsx': {
+    './src/graphql/generated/graphql.generated.tsx': {
       documents: './src/graphql/**/*.gql',
       plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
       config: {
@@ -12,25 +17,27 @@ const config: CodegenConfig = {
         withHooks: true,
         withHOC: false,
         withComponent: false,
+        eslint: false,
         exportFragmentSpreadSubTypes: true,
         documentMode: 'graphQLTag',
       },
     },
-    './src/graphql/generated/page.tsx': {
+    './src/graphql/generated/page.generated.tsx': {
       documents: './src/graphql/**/*.gql',
       plugins: ['graphql-codegen-apollo-next-ssr'],
       config: {
         reactApolloVersion: 3,
         withHooks: true,
         documentMode: 'external',
-        importDocumentNodeExternallyFrom: './graphql',
+        importDocumentNodeExternallyFrom: './graphql.generated',
         apolloClientInstanceImport: '../../lib/withApollo',
         contextType: 'ApolloClientContext',
+        eslint: false,
         contextTypeRequired: true,
       },
       preset: 'import-types-preset',
       presetConfig: {
-        typesPath: './graphql',
+        typesPath: './graphql.generated',
       },
     },
   },

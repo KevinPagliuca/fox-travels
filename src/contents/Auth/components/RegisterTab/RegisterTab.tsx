@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { GraphQLError } from 'graphql';
-import { useUserRegisterMutation } from 'graphql/generated/graphql';
+import { useUserRegisterMutation } from 'graphql/generated/graphql.generated';
 import type { RegisterFormDataType } from 'interfaces';
 import { usersService } from 'services/user/users.service';
 import { registerFormSchema } from 'shared/validations/forms';

@@ -2,4 +2,5 @@
 **/out/*
 **/.next/*
 
-**/src/graphql/generated
+
+/src/graphql/generated/*.generated.tsx
