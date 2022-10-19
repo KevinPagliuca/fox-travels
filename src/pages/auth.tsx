@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 
 import { AuthContent } from 'contents/Auth';
 import { PublicLayout } from 'layouts/PublicLayout';
+import { withApollo } from 'lib/withApollo';
 
 const AuthPage: NextPage = () => {
   return (
@@ -11,4 +12,4 @@ const AuthPage: NextPage = () => {
   );
 };
 
-export default AuthPage;
+export default withApollo(AuthPage);
