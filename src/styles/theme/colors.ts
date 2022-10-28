@@ -8,7 +8,7 @@ const commonColors = {
 
   error: '#D21F3C',
   success: '#0E8A16',
-  warning: '#F5A623',
+  warning: '#F5A623'
 } as const;
 
 export const colors = {
@@ -20,5 +20,5 @@ export const colors = {
   tertiary: '#141627',
   dark_blue: '#1C1F37',
   title: '#D0D4E7',
-  body: '#626577',
+  body: '#626577'
 } as const;

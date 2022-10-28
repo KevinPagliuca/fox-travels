@@ -1,4 +1,5 @@
 import { List } from 'phosphor-react';
+
 import { breakpoints } from 'shared/breakpoints';
 import styled, { css } from 'styled-components';
 
@@ -14,7 +15,7 @@ export const SidebarContainer = styled.aside`
   display: flex;
   flex-direction: column;
   width: 18.25rem;
-  padding: 3.125rem 1.5rem;
+  padding: 3.125rem 1.25rem;
   overflow: hidden;
   height: 100%;
   gap: 3rem;
@@ -77,6 +78,7 @@ export const SidebarContent = styled.div`
   flex-direction: column;
   overflow-y: auto;
   height: 100%;
+  padding-right: 1rem;
 
   ${hideContent};
 `;
@@ -84,19 +86,17 @@ export const SidebarContent = styled.div`
 export const NavigationList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.25rem;
   height: 100%;
-
-  /* @media (max-width: ${breakpoints.mediumDesktop}) {
-    flex-direction: row;
-  } */
+  padding: 0.25rem 1.25rem 0.25rem 0;
 `;
 
 export const NavigationItem = styled.div<NavigationItemAttributes>`
-  ${({ theme, isActive }) => css`
-    display: flex;
+  ${({ theme, isActive, isHidden }) => css`
+    display: ${isHidden ? 'none' : 'flex'};
     align-items: center;
     justify-content: center;
+    padding: 0 0.25rem;
 
     a {
       display: flex;
@@ -128,20 +128,6 @@ export const NavigationItem = styled.div<NavigationItemAttributes>`
         box-shadow: 0 0 0 2px ${isActive ? theme.colors.secondary : theme.colors.primary};
       }
     }
-
-    /* @media (max-width: ${breakpoints.mediumDesktop}) {
-      grid-area: logout;
-
-      a {
-        padding: 0.5rem;
-        gap: 0;
-        justify-content: center;
-      }
-
-      span {
-        display: none;
-      }
-    } */
   `}
 `;
 

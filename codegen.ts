@@ -6,7 +6,7 @@ const config: CodegenConfig = {
   schema: API_URL,
   overwrite: true,
   hooks: {
-    afterAllFileWrite: ['eslint --fix'],
+    afterAllFileWrite: ['eslint --fix', 'prettier --write']
   },
   generates: {
     './src/graphql/generated/graphql.generated.tsx': {
@@ -19,8 +19,8 @@ const config: CodegenConfig = {
         withComponent: false,
         eslint: false,
         exportFragmentSpreadSubTypes: true,
-        documentMode: 'graphQLTag',
-      },
+        documentMode: 'graphQLTag'
+      }
     },
     './src/graphql/generated/page.generated.tsx': {
       documents: './src/graphql/**/*.gql',
@@ -30,17 +30,17 @@ const config: CodegenConfig = {
         withHooks: true,
         documentMode: 'external',
         importDocumentNodeExternallyFrom: './graphql.generated',
-        apolloClientInstanceImport: '../../lib/withApollo',
+        apolloClientInstanceImport: '../../lib/apolloClient',
         contextType: 'ApolloClientContext',
         eslint: false,
-        contextTypeRequired: true,
+        contextTypeRequired: true
       },
       preset: 'import-types-preset',
       presetConfig: {
-        typesPath: './graphql.generated',
-      },
-    },
-  },
+        typesPath: './graphql.generated'
+      }
+    }
+  }
 };
 
 export default config;

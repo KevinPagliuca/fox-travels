@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
@@ -17,6 +16,24 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type CreateLocationInput = {
+  city: Scalars['String'];
+  country: Scalars['String'];
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
+  placeName: Scalars['String'];
+  type: LocationTypeEnum;
+};
+
+export type CreateTravelInput = {
+  easyVisa: Scalars['Boolean'];
+  locationId: Scalars['String'];
+  maxPrice: Scalars['Float'];
+  minPrice: Scalars['Float'];
+  pricePerMiles: Scalars['Float'];
+  title: Scalars['String'];
+};
+
 export type CreateUser = {
   __typename?: 'CreateUser';
   token: Scalars['String'];
@@ -30,43 +47,124 @@ export type CreateUserInput = {
   password: Scalars['String'];
 };
 
-export type LoginUserInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+export type Location = {
+  __typename?: 'Location';
+  city: Scalars['String'];
+  country: Scalars['String'];
+  id: Scalars['ID'];
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
+  placeName: Scalars['String'];
+  travels: Array<Travel>;
+  type: LocationTypeEnum;
 };
+
+/** Available Locations types enum */
+export enum LocationTypeEnum {
+  Airport = 'AIRPORT',
+  Place = 'PLACE'
+}
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createLocation: Location;
+  createTravel: Travel;
   createUser: CreateUser;
-  loginUser: CreateUser;
+  deleteLocation: Location;
+  deleteTravel: Travel;
+  updateLocation: Location;
+  updateTravel: Travel;
+  userAuth: CreateUser;
+};
+
+export type MutationCreateLocationArgs = {
+  data: CreateLocationInput;
+};
+
+export type MutationCreateTravelArgs = {
+  data: CreateTravelInput;
 };
 
 export type MutationCreateUserArgs = {
   data: CreateUserInput;
 };
 
-export type MutationLoginUserArgs = {
-  data: LoginUserInput;
+export type MutationDeleteLocationArgs = {
+  id: Scalars['String'];
+};
+
+export type MutationDeleteTravelArgs = {
+  id: Scalars['String'];
+};
+
+export type MutationUpdateLocationArgs = {
+  data: UpdateLocationInput;
+};
+
+export type MutationUpdateTravelArgs = {
+  data: UpdateTravelInput;
+};
+
+export type MutationUserAuthArgs = {
+  data: UserAuthInput;
 };
 
 export type Query = {
   __typename?: 'Query';
-  getAll: Array<User>;
-  getById: User;
+  getAllLocations: Array<Location>;
+  getAllTravels: Array<Travel>;
+  getAllUsers: Array<User>;
+  getLocationById: Location;
+  getTravelById: Travel;
+  getUserById: User;
   me: CreateUser;
+};
+
+export type QueryGetLocationByIdArgs = {
+  id: Scalars['String'];
+};
+
+export type QueryGetTravelByIdArgs = {
+  id: Scalars['String'];
+};
+
+export type QueryGetUserByIdArgs = {
+  id: Scalars['String'];
 };
 
 export type Travel = {
   __typename?: 'Travel';
   createdAt: Scalars['DateTime'];
   discount: Scalars['Float'];
-  endDate: Scalars['DateTime'];
   id: Scalars['ID'];
+  location: Location;
+  locationId: Scalars['String'];
+  maxPrice: Scalars['Float'];
+  minPrice: Scalars['Float'];
+  pricePerMiles: Scalars['Float'];
+  title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
+};
+
+export type UpdateLocationInput = {
+  city: Scalars['String'];
+  country: Scalars['String'];
+  id: Scalars['String'];
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
+  placeName: Scalars['String'];
+  type: LocationTypeEnum;
+};
+
+export type UpdateTravelInput = {
+  discount: Scalars['Float'];
+  endDate: Scalars['DateTime'];
+  id: Scalars['String'];
+  locationId: Scalars['String'];
   price: Scalars['Float'];
   startDate: Scalars['DateTime'];
   title: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
-  user: User;
+  userId: Scalars['String'];
 };
 
 export type User = {
@@ -74,9 +172,45 @@ export type User = {
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   id: Scalars['ID'];
+  isAdmin: Scalars['Boolean'];
   name: Scalars['String'];
-  travels: Array<Travel>;
   updatedAt: Scalars['DateTime'];
+};
+
+export type UserAuthInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type CreateNewLocationMutationVariables = Exact<{
+  data: CreateLocationInput;
+}>;
+
+export type CreateNewLocationMutation = {
+  __typename?: 'Mutation';
+  createLocation: {
+    __typename?: 'Location';
+    id: string;
+    placeName: string;
+    latitude: number;
+    longitude: number;
+    city: string;
+    country: string;
+    type: LocationTypeEnum;
+  };
+};
+
+export type GetAllUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllUsersQuery = {
+  __typename?: 'Query';
+  getAllUsers: Array<{
+    __typename?: 'User';
+    id: string;
+    name: string;
+    email: string;
+    isAdmin: boolean;
+  }>;
 };
 
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
@@ -86,20 +220,20 @@ export type MeQuery = {
   me: {
     __typename?: 'CreateUser';
     token: string;
-    user: { __typename?: 'User'; id: string; name: string; email: string };
+    user: { __typename?: 'User'; id: string; name: string; email: string; isAdmin: boolean };
   };
 };
 
 export type AuthUserMutationVariables = Exact<{
-  userData: LoginUserInput;
+  data: UserAuthInput;
 }>;
 
 export type AuthUserMutation = {
   __typename?: 'Mutation';
-  loginUser: {
+  userAuth: {
     __typename?: 'CreateUser';
     token: string;
-    user: { __typename?: 'User'; id: string; email: string; name: string };
+    user: { __typename?: 'User'; id: string; email: string; name: string; isAdmin: boolean };
   };
 };
 
@@ -112,10 +246,110 @@ export type UserRegisterMutation = {
   createUser: {
     __typename?: 'CreateUser';
     token: string;
-    user: { __typename?: 'User'; id: string; name: string; email: string };
+    user: { __typename?: 'User'; id: string; name: string; email: string; isAdmin: boolean };
   };
 };
 
+export const CreateNewLocationDocument = gql`
+  mutation createNewLocation($data: CreateLocationInput!) {
+    createLocation(data: $data) {
+      id
+      placeName
+      latitude
+      longitude
+      city
+      country
+      type
+    }
+  }
+`;
+export type CreateNewLocationMutationFn = Apollo.MutationFunction<
+  CreateNewLocationMutation,
+  CreateNewLocationMutationVariables
+>;
+
+/**
+ * __useCreateNewLocationMutation__
+ *
+ * To run a mutation, you first call `useCreateNewLocationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateNewLocationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createNewLocationMutation, { data, loading, error }] = useCreateNewLocationMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateNewLocationMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateNewLocationMutation,
+    CreateNewLocationMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateNewLocationMutation, CreateNewLocationMutationVariables>(
+    CreateNewLocationDocument,
+    options
+  );
+}
+export type CreateNewLocationMutationHookResult = ReturnType<typeof useCreateNewLocationMutation>;
+export type CreateNewLocationMutationResult = Apollo.MutationResult<CreateNewLocationMutation>;
+export type CreateNewLocationMutationOptions = Apollo.BaseMutationOptions<
+  CreateNewLocationMutation,
+  CreateNewLocationMutationVariables
+>;
+export const GetAllUsersDocument = gql`
+  query getAllUsers {
+    getAllUsers {
+      id
+      name
+      email
+      isAdmin
+    }
+  }
+`;
+
+/**
+ * __useGetAllUsersQuery__
+ *
+ * To run a query within a React component, call `useGetAllUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllUsersQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
+}
+export function useGetAllUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(
+    GetAllUsersDocument,
+    options
+  );
+}
+export type GetAllUsersQueryHookResult = ReturnType<typeof useGetAllUsersQuery>;
+export type GetAllUsersLazyQueryHookResult = ReturnType<typeof useGetAllUsersLazyQuery>;
+export type GetAllUsersQueryResult = Apollo.QueryResult<
+  GetAllUsersQuery,
+  GetAllUsersQueryVariables
+>;
 export const MeDocument = gql`
   query Me {
     me {
@@ -123,6 +357,7 @@ export const MeDocument = gql`
         id
         name
         email
+        isAdmin
       }
       token
     }
@@ -158,13 +393,14 @@ export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const AuthUserDocument = gql`
-  mutation AuthUser($userData: LoginUserInput!) {
-    loginUser(data: $userData) {
+  mutation AuthUser($data: UserAuthInput!) {
+    userAuth(data: $data) {
       token
       user {
         id
         email
         name
+        isAdmin
       }
     }
   }
@@ -187,7 +423,7 @@ export type AuthUserMutationFn = Apollo.MutationFunction<
  * @example
  * const [authUserMutation, { data, loading, error }] = useAuthUserMutation({
  *   variables: {
- *      userData: // value for 'userData'
+ *      data: // value for 'data'
  *   },
  * });
  */
@@ -210,6 +446,7 @@ export const UserRegisterDocument = gql`
         id
         name
         email
+        isAdmin
       }
       token
     }

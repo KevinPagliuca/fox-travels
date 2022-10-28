@@ -2,16 +2,19 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button } from 'components/Button';
-import { Input } from 'components/Input';
 import { GraphQLError } from 'graphql';
 import { useUserRegisterMutation } from 'graphql/generated/graphql.generated';
-import type { RegisterFormDataType } from 'interfaces';
-import { usersService } from 'services/user/users.service';
+
+import { yupResolver } from '@hookform/resolvers/yup';
 import { registerFormSchema } from 'shared/validations/forms';
 import { useAuthStore } from 'store/Authentication';
 import { useLoginPageStore } from 'store/pages/LoginPage';
+
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
+
+import type { RegisterFormDataType } from 'interfaces';
+import { usersService } from 'services/user/users.service';
 
 import * as S from './RegisterTab.styles';
 
@@ -19,26 +22,29 @@ const InputFields = [
   { name: 'name', label: 'Nome completo' },
   { name: 'email', label: 'E-mail' },
   { name: 'password', label: 'Senha', type: 'password' },
-  { name: 'confirmPassword', label: 'Confirmar senha', type: 'password' },
+  { name: 'confirmPassword', label: 'Confirmar senha', type: 'password' }
 ] as const;
 
 export const RegisterTab = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<RegisterFormDataType>({
-    resolver: yupResolver(registerFormSchema),
+    resolver: yupResolver(registerFormSchema)
   });
 
-  const handleLogin = useLoginPageStore((state) => state.handleLogin);
+  const handleLogin = useLoginPageStore(state => state.handleLogin);
   const [registerUserMutation] = useUserRegisterMutation();
-  const updateSession = useAuthStore((state) => state.updateSession);
+  const updateSession = useAuthStore(state => state.updateSession);
 
   const onSubmit = useCallback(
-    handleSubmit(async (data) => {
+    handleSubmit(async data => {
       try {
-        const response = await usersService.register({ mutation: registerUserMutation, ...data });
+        const response = await usersService.register({
+          mutation: registerUserMutation,
+          payload: data
+        });
         updateSession(response);
       } catch (err) {
         const error = err as GraphQLError;
@@ -51,7 +57,7 @@ export const RegisterTab = () => {
   return (
     <S.RegisterTabContainer tabIndex={-1} onSubmit={onSubmit}>
       <S.InputsWrapper>
-        {InputFields.map((input) => (
+        {InputFields.map(input => (
           <Input key={input.name} {...input} control={control} error={errors[input.name]} />
         ))}
       </S.InputsWrapper>

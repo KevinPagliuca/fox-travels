@@ -1,6 +1,7 @@
-import { LayoutContent } from 'layouts/common';
 import { breakpoints } from 'shared/breakpoints';
 import styled from 'styled-components';
+
+import { LayoutContent } from 'layouts/common';
 
 export const PublicLayoutContainer = styled(LayoutContent)`
   margin: auto;

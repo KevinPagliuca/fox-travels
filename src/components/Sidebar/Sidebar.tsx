@@ -1,43 +1,53 @@
+import { Bookmarks, Gear, Layout, Ticket, SignOut, Crown } from 'phosphor-react';
 import React, { useCallback, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { useAuthStore } from 'store/Authentication/Auth.store';
+
 import { Scroll } from 'components/Scroll';
 import { SidebarDrawer } from 'components/SidebarDrawer';
-import { Bookmarks, Gear, Layout, Ticket, SignOut } from 'phosphor-react';
-import { useAuthStore } from 'store/Authentication/Auth.store';
 
 import * as S from './Sidebar.styles';
 
 const navigationItems = [
   {
+    name: 'Painel Adm.',
+    icon: <Crown size={24} />,
+    href: '/painel-admin',
+    isHidden: (isAdmin?: boolean) => !isAdmin
+  },
+  {
     name: 'Dashboard',
     href: '/',
-    icon: <Layout size={24} />,
+    icon: <Layout size={24} />
   },
   {
     name: 'Minhas passagens',
     href: '/my-tickets',
-    icon: <Ticket size={24} />,
+    icon: <Ticket size={24} />
   },
   {
     name: 'Favoritos',
     href: '/favorites',
-    icon: <Bookmarks size={24} />,
+    icon: <Bookmarks size={24} />
   },
   {
     name: 'Configurações',
     href: '/settings',
-    icon: <Gear size={24} />,
-  },
+    icon: <Gear size={24} />
+  }
 ];
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useRouter();
-  const handleLogout = useAuthStore((state) => state.handleLogout);
+  const { handleLogout, isAdmin } = useAuthStore(state => ({
+    handleLogout: state.handleLogout,
+    isAdmin: state.user?.isAdmin
+  }));
 
   const onOpenChange = useCallback((isOpen: boolean) => {
     setIsOpen(isOpen);
@@ -61,18 +71,34 @@ export const Sidebar = () => {
       </S.SidebarHeader>
 
       <S.SidebarContent>
-        <Scroll verticallOffset={4}>
+        <Scroll>
           <S.NavigationList>
-            {navigationItems.map((item) => (
-              <S.NavigationItem key={item.name} isActive={item.href === pathname} tabIndex={-1}>
-                <Link href={item.href}>
-                  <a tabIndex={0}>
-                    {item.icon}
-                    <span>{item.name}</span>
-                  </a>
-                </Link>
-              </S.NavigationItem>
-            ))}
+            {navigationItems.map(item => {
+              const shouldHidden = item.isHidden?.(isAdmin);
+              const isActive = pathname === item.href;
+              return (
+                <S.NavigationItem
+                  key={item.name}
+                  isActive={isActive}
+                  tabIndex={-1}
+                  isHidden={shouldHidden}
+                >
+                  {isActive ? (
+                    <a tabIndex={0}>
+                      {item.icon}
+                      <span>{item.name}</span>
+                    </a>
+                  ) : (
+                    <Link href={isActive ? pathname : item.href}>
+                      <a tabIndex={0}>
+                        {item.icon}
+                        <span>{item.name}</span>
+                      </a>
+                    </Link>
+                  )}
+                </S.NavigationItem>
+              );
+            })}
           </S.NavigationList>
         </Scroll>
       </S.SidebarContent>

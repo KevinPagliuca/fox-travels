@@ -4,6 +4,7 @@ query Me {
       id
       name
       email
+      isAdmin
     }
     token
   }

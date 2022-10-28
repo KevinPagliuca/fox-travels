@@ -159,7 +159,7 @@ export const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  margin-right: auto;
+  margin-left: auto;
 
   @media (max-width: ${breakpoints.mediumDesktop}) {
     margin-left: auto;

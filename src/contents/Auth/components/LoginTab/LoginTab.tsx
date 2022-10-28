@@ -2,18 +2,19 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button } from 'components/Button';
-import { Input } from 'components/Input';
 import { GraphQLError } from 'graphql';
 import { useAuthUserMutation } from 'graphql/generated/graphql.generated';
-import type { LoginFormDataType } from 'interfaces';
-import { setCookie } from 'nookies';
-import { usersService } from 'services/user/users.service';
-import { APP_USER_TOKEN } from 'shared/constants';
+
+import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormSchema } from 'shared/validations/forms';
 import { useAuthStore } from 'store/Authentication/Auth.store';
 import { useLoginPageStore } from 'store/pages/LoginPage';
+
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
+
+import type { LoginFormDataType } from 'interfaces';
+import { usersService } from 'services/user/users.service';
 
 import * as S from './LoginTab.styles';
 
@@ -21,29 +22,24 @@ export const LoginTab = () => {
   const {
     control,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting, errors }
   } = useForm<LoginFormDataType>({
-    resolver: yupResolver(loginFormSchema),
+    resolver: yupResolver(loginFormSchema)
   });
 
-  const { handleRegister } = useLoginPageStore();
-  const { updateSession } = useAuthStore();
   const [authMutation] = useAuthUserMutation();
+  const handleRegister = useLoginPageStore(state => state.handleRegister);
+  const updateSession = useAuthStore(state => state.updateSession);
 
   const onSubmit = useCallback(
-    handleSubmit(async ({ email, password }) => {
+    handleSubmit(async payload => {
       try {
         const data = await usersService.login({
-          email,
-          password,
-          mutation: authMutation,
+          payload,
+          mutation: authMutation
         });
-
         updateSession(data);
-        setCookie(null, APP_USER_TOKEN, data.token, {
-          maxAge: 30 * 24 * 60 * 60,
-          path: '/',
-        });
+        toast.success('Autenticado com sucesso!');
       } catch (err) {
         const error = err as GraphQLError;
         toast.error(error.message);

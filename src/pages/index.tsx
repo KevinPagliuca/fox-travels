@@ -2,16 +2,17 @@ import type { NextPage } from 'next';
 
 import { Header } from 'components/Header';
 import { HomeContent } from 'contents/Home';
-import { withAuth } from 'HOC/withAuth';
 import { DefaultLayout } from 'layouts';
-import { withApollo } from 'lib/withApollo';
 
-const Dashboard: NextPage = () => {
+import { withSSRAuth, WithSSRAuthResult } from 'utils/withSSRAuth';
+
+const Dashboard: NextPage<WithSSRAuthResult> = () => {
   return (
-    <DefaultLayout contentHeader={<Header />}>
+    <DefaultLayout contentHeader={<Header />} pageTitle="Dashboard | Fox Travels">
       <HomeContent />
     </DefaultLayout>
   );
 };
 
-export default withApollo(withAuth(Dashboard));
+export const getServerSideProps = withSSRAuth();
+export default Dashboard;

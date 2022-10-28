@@ -10,7 +10,7 @@ export const Drawer = ({
   isOpen,
   onOpenChange,
   triggerComponent,
-  triggerClassName,
+  triggerClassName
 }: IDrawerProps) => {
   // const dragDirection = React.useRef<'x' | 'y'>();
 
@@ -49,7 +49,7 @@ export const Drawer = ({
                 // onDragEnd={onDragEnd}
                 variants={{
                   show: { opacity: 1, translateX: 0 },
-                  hide: { opacity: 0, translateX: '-100%' },
+                  hide: { opacity: 0, translateX: '-100%' }
                 }}
               >
                 {children}

@@ -3,11 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
-    styledComponents: true,
+    styledComponents: true
   },
   images: {
-    domains: ['via.placeholder.com'],
-  },
+    domains: ['via.placeholder.com']
+  }
 };
 
 module.exports = nextConfig;

@@ -3,7 +3,7 @@ export const breakpointsValues = {
   mediumDesktop: 1000,
   tablet: 800,
   mobile: 600,
-  smallMobile: 480,
+  smallMobile: 480
 } as const;
 
 export const breakpoints = {
@@ -11,5 +11,5 @@ export const breakpoints = {
   mediumDesktop: `${breakpointsValues.mediumDesktop}px`,
   tablet: `${breakpointsValues.tablet}px`,
   mobile: `${breakpointsValues.mobile}px`,
-  smallMobile: `${breakpointsValues.smallMobile}px`,
+  smallMobile: `${breakpointsValues.smallMobile}px`
 } as const;

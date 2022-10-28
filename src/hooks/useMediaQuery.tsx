@@ -14,6 +14,6 @@ export const useWindowSize = () => {
 
   return {
     windowWidth: size[0],
-    windowHeight: size[1],
+    windowHeight: size[1]
   };
 };

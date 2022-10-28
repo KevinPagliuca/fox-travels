@@ -1,0 +1,25 @@
+enum LocationType {
+  AIRPORT
+  PLACE
+}
+
+type CreateLocationInput {
+  placeName: String!
+  latitude: Float!
+  type: LocationType!
+  longitude: Float!
+  city: String!
+  country: String!
+}
+
+mutation createNewLocation($data: CreateLocationInput!) {
+  createLocation(data: $data) {
+    id
+    placeName
+    latitude
+    longitude
+    city
+    country
+    type
+  }
+}

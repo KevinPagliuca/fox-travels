@@ -5,5 +5,5 @@ import { transitions } from './transitions';
 export const theme = {
   colors,
   fonts,
-  transitions,
+  transitions
 } as const;

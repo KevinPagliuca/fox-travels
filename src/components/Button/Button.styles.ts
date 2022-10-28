@@ -1,11 +1,12 @@
 import { ThreeDots } from 'react-loader-spinner';
 
+import { lighten } from 'polished';
 import styled, { css } from 'styled-components';
 
 import { ButtonAttributes, ButtonVariantType } from './Button.interface';
 
 const DefaultButton = styled.button<ButtonAttributes>`
-  ${({ theme }) => css`
+  ${({ theme, fontWeight = '700', fullWidth }) => css`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,7 +18,7 @@ const DefaultButton = styled.button<ButtonAttributes>`
     height: 100%;
 
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: ${fontWeight};
     font-family: ${theme.fonts.secondary};
     transition: ${theme.transitions.preset.default};
 
@@ -36,6 +37,11 @@ const DefaultButton = styled.button<ButtonAttributes>`
         height: 60%;
       }
     }
+
+    ${fullWidth &&
+    css`
+      width: 100%;
+    `}
   `}
 `;
 
@@ -51,7 +57,7 @@ const PrimaryButton = styled(DefaultButton)`
     }
 
     &:not(:disabled):focus {
-      box-shadow: inset 0 0 0 2px ${theme.colors.secondary_light};
+      box-shadow: inset 0 0 0 2px ${theme.colors.secondary};
     }
   `}
 `;
@@ -66,10 +72,38 @@ const TertiaryButton = styled(DefaultButton)`
   background: ${({ theme }) => theme.colors.tertiary};
 `;
 
+const DarkblueButton = styled(DefaultButton)`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    background: ${theme.colors.dark_blue};
+
+    &:not(:disabled):hover,
+    &:not(:disabled):active {
+      color: ${theme.colors.white};
+      background: ${lighten(0.05, theme.colors.dark_blue)};
+    }
+
+    &:not(:disabled):focus {
+      box-shadow: inset 0 0 0 2px ${theme.colors.white};
+    }
+  `}
+`;
+
+const UnstyledButton = styled.button`
+  ${({ theme }) => css`
+    border: unset;
+    background: unset;
+    color: unset;
+    transition: ${theme.transitions.preset.default};
+  `}
+`;
+
 export const Buttons: Record<ButtonVariantType, typeof DefaultButton> = {
   primary: PrimaryButton,
   secondary: SecondaryButton,
   tertiary: TertiaryButton,
+  darkblue: DarkblueButton,
+  unstyled: UnstyledButton
 };
 
 export const LoaderStyled = styled(ThreeDots)``;

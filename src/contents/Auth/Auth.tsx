@@ -10,7 +10,7 @@ import { loginTabOptionsKeys, TabOptionsKeysType } from './tabOptions';
 
 const tabOptions: TabsOptionsType[] = [
   { key: loginTabOptionsKeys.login, title: 'Login', content: <LoginTab /> },
-  { key: loginTabOptionsKeys.register, title: 'Cadastro', content: <RegisterTab /> },
+  { key: loginTabOptionsKeys.register, title: 'Cadastro', content: <RegisterTab /> }
 ];
 
 export const AuthContent = () => {
@@ -22,7 +22,7 @@ export const AuthContent = () => {
         tabOptions={tabOptions}
         defaultActiveKey={selectedTab}
         selectedTabKey={selectedTab}
-        onValueChange={(value) => setSelectedTab(value as TabOptionsKeysType)}
+        onValueChange={value => setSelectedTab(value as TabOptionsKeysType)}
       />
     </S.AuthContainer>
   );

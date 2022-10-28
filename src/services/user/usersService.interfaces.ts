@@ -1,14 +1,16 @@
-import { AuthUserMutationFn, UserRegisterMutationFn } from 'graphql/generated/graphql.generated';
+import {
+  AuthUserMutationFn,
+  CreateUserInput,
+  UserAuthInput,
+  UserRegisterMutationFn
+} from 'graphql/generated/graphql.generated';
 
 export interface IUserServiceLoginParams {
   mutation: AuthUserMutationFn;
-  email: string;
-  password: string;
+  payload: UserAuthInput;
 }
 
 export interface IUserServiceRegisterParams {
   mutation: UserRegisterMutationFn;
-  email: string;
-  password: string;
-  name: string;
+  payload: CreateUserInput;
 }

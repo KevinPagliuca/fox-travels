@@ -5,11 +5,13 @@ import type { IInputProps } from './Input.interfaces';
 import * as S from './Input.styles';
 
 const InputComponent: FFR<HTMLInputElement, IInputProps> = (
-  { name, label, control, error, ...rest },
+  { name, label, control, error, variant = 'primary', ...rest },
   originalRef
 ) => {
+  const isDisabled = rest?.disabled || rest?.readOnly;
+
   return (
-    <S.InputContainer>
+    <S.InputContainer className={rest?.wrapperClassName}>
       {label && <S.InputLabel htmlFor={name}>{label}</S.InputLabel>}
       {control ? (
         <Controller
@@ -27,13 +29,15 @@ const InputComponent: FFR<HTMLInputElement, IInputProps> = (
                 ref={ref}
                 hasValue={!!value}
                 hasError={!!error}
+                variant={variant}
+                disabled={isDisabled}
                 {...rest}
               />
             );
           }}
         />
       ) : (
-        <S.InputField id={name} name={name} ref={originalRef} {...rest} />
+        <S.InputField id={name} name={name} ref={originalRef} variant={variant} {...rest} />
       )}
       {error && <S.InputError>{error.message}</S.InputError>}
     </S.InputContainer>
@@ -41,3 +45,4 @@ const InputComponent: FFR<HTMLInputElement, IInputProps> = (
 };
 
 export const Input = forwardRef(InputComponent);
+export const InputLabel = S.InputLabel;

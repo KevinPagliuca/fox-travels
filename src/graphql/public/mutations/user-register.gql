@@ -11,6 +11,7 @@ mutation UserRegister($data: CreateUserInput!) {
       id
       name
       email
+      isAdmin
     }
     token
   }

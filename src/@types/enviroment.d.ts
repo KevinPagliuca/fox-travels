@@ -14,6 +14,9 @@ declare namespace NodeJS {
     VERCEL_GIT_COMMIT_MESSAGE: string;
     VERCEL_GIT_COMMIT_AUTHOR_LOGIN: string;
     VERCEL_GIT_COMMIT_AUTHOR_NAME: string;
+
     NEXT_PUBLIC_API_URL: string;
+    NEXT_PUBLIC_MAPBOX_API_URL: string;
+    NEXT_PUBLIC_MAPBOX_API_KEY: string;
   }
 }

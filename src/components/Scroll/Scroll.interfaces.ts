@@ -1,6 +1,5 @@
-import { ReactNode, RefAttributes } from 'react';
-
 import { ScrollAreaProps, ScrollAreaViewportProps } from '@radix-ui/react-scroll-area';
+import { ReactNode, RefAttributes } from 'react';
 
 export interface IScrollProps {
   children: ReactNode;
@@ -8,8 +7,7 @@ export interface IScrollProps {
   viewportProps?: ScrollAreaViewportProps & RefAttributes<HTMLDivElement>;
   hideVerticalScrollbar?: boolean;
   hideHorizontalScrollbar?: boolean;
-  verticallOffset?: number;
-  horizontalOffset?: number;
+  childrenFullHeight?: boolean;
 }
 
 export type ScrollAreaViewportAttributes = {

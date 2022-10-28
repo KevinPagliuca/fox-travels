@@ -4,7 +4,7 @@ import type { IButtonProps } from './Button.interface';
 import { Buttons, LoaderStyled } from './Button.styles';
 
 const ButtonComponent: FFR<HTMLButtonElement, IButtonProps> = (
-  { children, variant = 'primary', isLoading = false, ...rest },
+  { children, variant = 'primary', isLoading = false, fontWeight = '700', fullWidth, ...rest },
   ref
 ) => {
   const ButtonComponent = Buttons[variant];
@@ -13,6 +13,8 @@ const ButtonComponent: FFR<HTMLButtonElement, IButtonProps> = (
       {...rest}
       isLoading={isLoading}
       disabled={isLoading || rest?.disabled}
+      fontWeight={fontWeight}
+      fullWidth={fullWidth}
       ref={ref}
     >
       {isLoading ? <LoaderStyled color="currentColor" wrapperClass="buttonLoader" /> : children}

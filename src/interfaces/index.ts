@@ -1,3 +1,4 @@
+export * from './airport.interfaces';
 export * from './destinations.interfaces';
 export * from './travels.interfaces';
 export * from './forms.interfaces';

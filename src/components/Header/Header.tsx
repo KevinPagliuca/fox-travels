@@ -1,7 +1,7 @@
+import { Bell, MagnifyingGlass } from 'phosphor-react';
 import React from 'react';
 
 import { Avatar } from 'components/Avatar';
-import { Bell, MagnifyingGlass } from 'phosphor-react';
 
 import * as S from './Header.styles';
 

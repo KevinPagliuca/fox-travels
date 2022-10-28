@@ -18,15 +18,15 @@ export const InputLabel = styled.label`
 `;
 
 export const InputField = styled.input<InputFieldAttributes>`
-  ${({ theme, hasError, hasValue }) => css`
-    flex: 1;
-    height: 100%;
+  ${({ theme, hasError, hasValue, variant }) => css`
+    max-height: 3rem;
+    min-height: 2.5rem;
     border: 0;
     outline: 0;
     font-size: 0.875rem;
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    background: ${theme.colors.dark_blue};
+    background: ${variant === 'primary' ? theme.colors.dark_blue : theme.colors.tertiary};
     color: ${theme.colors.body};
 
     text-overflow: ellipsis;
@@ -51,6 +51,11 @@ export const InputField = styled.input<InputFieldAttributes>`
       color: ${theme.colors.error} !important;
       box-shadow: 0 0 0 2px ${theme.colors.error} !important;
     `}
+
+    &:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
   `}
 `;
 

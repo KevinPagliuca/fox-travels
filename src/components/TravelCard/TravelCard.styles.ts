@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 
 import {
   TravelCardFooterAttributes,
-  TravelCardOrientationAttributes,
+  TravelCardOrientationAttributes
 } from './TravelCard.interfaces';
 
 export const TravelCardContainer = styled.div<TravelCardOrientationAttributes>`

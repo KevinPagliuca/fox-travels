@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
     try {
       context.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
         });
 
       const initialProps = await Document.getInitialProps(context);
@@ -21,7 +21,7 @@ export default class MyDocument extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        ),
+        )
       };
     } finally {
       sheet.seal();
@@ -38,7 +38,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
             rel="stylesheet"
           />
-          {/* <link rel="icon" href="/images/favicon.png" type="image/png+xml" sizes="any" /> */}
+          <link rel="icon" href="/orange-logo-plane.svg" type="image/png+xml" sizes="any" />
         </Head>
         <body>
           <Main />

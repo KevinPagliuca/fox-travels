@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { logoAnimation } from './logoAnimation';
+import { MapboxControlsStyles, MapboxSearchBoxStyles } from './mapboxSearchBox';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -34,9 +34,7 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     font-family: inherit;
     color: inherit;
-  }
-
- 
+  } 
 
   @media (max-width: 1080px) {
     html {
@@ -50,6 +48,6 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  ${logoAnimation}; 
-  
+  ${MapboxSearchBoxStyles};
+  ${MapboxControlsStyles};
 `;

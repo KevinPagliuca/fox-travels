@@ -1,20 +1,20 @@
-import React, { forwardRef, ForwardRefRenderFunction as FFR } from 'react';
+import { X } from 'phosphor-react';
+import React from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { Drawer } from 'components/Drawer';
-import { X } from 'phosphor-react';
 
 import { ISidebarDrawerProps } from './SidebarDrawer.interfaces';
 import * as S from './SidebarDrawer.styles';
 
-const SidebarDrawerComponent: FFR<HTMLDivElement, ISidebarDrawerProps> = ({
+export const SidebarDrawer = ({
   isOpen,
   onOpenChange,
   children,
-  triggerClassName,
-}) => {
+  triggerClassName
+}: ISidebarDrawerProps) => {
   return (
     <Drawer
       isOpen={isOpen}
@@ -43,5 +43,3 @@ const SidebarDrawerComponent: FFR<HTMLDivElement, ISidebarDrawerProps> = ({
     </Drawer>
   );
 };
-
-export const SidebarDrawer = forwardRef(SidebarDrawerComponent);
