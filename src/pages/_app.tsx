@@ -22,12 +22,12 @@ import { theme } from 'styles/theme';
 export default function MyApp({ Component, pageProps }: AppProps<WithApolloProps>) {
   const createStore = useCreateAuthStore({
     isAutenticated: true,
-    token: pageProps.authResult.token,
+    token: pageProps?.authResult?.token,
     user: {
-      id: pageProps.authResult.user.id,
-      email: pageProps.authResult.user.email,
-      name: pageProps.authResult.user.name,
-      isAdmin: pageProps.authResult.user.isAdmin
+      id: pageProps?.authResult?.user.id,
+      email: pageProps?.authResult?.user.email,
+      name: pageProps?.authResult?.user.name,
+      isAdmin: pageProps?.authResult?.user.isAdmin
     }
   });
 
