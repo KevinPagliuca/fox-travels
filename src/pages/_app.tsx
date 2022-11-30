@@ -7,7 +7,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import React from 'react';
-import { ConfigProvider } from 'react-avatar';
 import { ToastContainer } from 'react-toastify';
 
 import type { AppProps } from 'next/app';
@@ -41,9 +40,7 @@ export default function MyApp({ Component, pageProps }: AppProps<WithApolloProps
         <ThemeProvider theme={theme}>
           <GlobalStyle />
           <ToastContainer theme="dark" />
-          <ConfigProvider colors={Object.values(theme.colors)}>
-            <Component {...pageProps} />
-          </ConfigProvider>
+          <Component {...pageProps} />
         </ThemeProvider>
       </ApolloProvider>
     </AuthStoreProvider>

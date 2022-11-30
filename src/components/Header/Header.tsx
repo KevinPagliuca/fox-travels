@@ -22,7 +22,12 @@ export const Header = () => {
         </S.NotificationButton>
 
         <S.ProfileContainer>
-          <Avatar name="Kevin Pagliuca" round size="medium" title="Kevin Pagliuca" />
+          <Avatar
+            round
+            name="Kevin Pagliuca"
+            size="medium"
+            src="https://github.com/kevinpagliuca.png"
+          />
           <S.ProfileInfo>
             <S.ProfileName>Kevin Pagliuca</S.ProfileName>
             <S.ProfileLevel>Traveler Pro</S.ProfileLevel>
