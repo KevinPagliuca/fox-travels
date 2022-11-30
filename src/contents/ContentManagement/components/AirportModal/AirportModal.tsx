@@ -72,7 +72,7 @@ export const AirportModal = ({ onClose, isOpen, selectedAiport }: IAirportModalP
           await locationsService.updateLocation({
             payload: {
               ...payload,
-              id: selectedAiport?.id,
+              id: selectedAiport.id,
               latitude: Number(payload.latitude),
               longitude: Number(payload.longitude),
               type: LocationTypeEnum.Airport
@@ -88,7 +88,7 @@ export const AirportModal = ({ onClose, isOpen, selectedAiport }: IAirportModalP
         toast.error(error.message);
       }
     }),
-    [createNewLocationMutation]
+    [createNewLocationMutation, selectedAiport]
   );
 
   const onOpenChange = useCallback(

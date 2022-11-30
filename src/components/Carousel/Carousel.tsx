@@ -25,23 +25,26 @@ export const Carousel = ({
           <CaretLeft size={24} />
         </S.NavigationPrevButton>
       )}
-      <S.CarouselContainer
-        id={`CarouselContainer_${id}`}
-        modules={[Pagination, Navigation]}
-        className={classNames}
-        pagination={{ dynamicBullets: true, clickable: true }}
-        allowTouchMove={allowTouchMove}
-        navigation={{
-          nextEl: `.next-button_${id}`,
-          prevEl: `.prev-button_${id}`,
-          disabledClass: `disabled-navigation_${id}`
-        }}
-        {...rest}
-      >
-        {itemMap.map(Component => (
-          <SwiperSlide key={`CarouselItem_${id}_${Component.key}`}>{Component}</SwiperSlide>
-        ))}
-      </S.CarouselContainer>
+
+      <S.CarouselWrapper>
+        <S.CarouselContainer
+          id={`CarouselContainer_${id}`}
+          modules={[Pagination, Navigation]}
+          className={classNames}
+          pagination={{ dynamicBullets: true, clickable: true }}
+          allowTouchMove={allowTouchMove}
+          navigation={{
+            nextEl: `.next-button_${id}`,
+            prevEl: `.prev-button_${id}`,
+            disabledClass: `disabled-navigation_${id}`
+          }}
+          {...rest}
+        >
+          {itemMap.map(Component => (
+            <SwiperSlide key={`CarouselItem_${id}_${Component.key}`}>{Component}</SwiperSlide>
+          ))}
+        </S.CarouselContainer>
+      </S.CarouselWrapper>
       {!withOutNavigation && (
         <S.NavigationNextButton className={`next-button_${id}`}>
           <CaretRight size={24} />

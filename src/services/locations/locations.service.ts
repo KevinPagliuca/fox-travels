@@ -1,4 +1,5 @@
 import { GraphQLError } from 'graphql';
+import { Location } from 'graphql/generated';
 
 import {
   ICreateLocationServiceParams,
@@ -10,7 +11,15 @@ class LocationsService {
   async createLocation({ mutation, payload }: ICreateLocationServiceParams) {
     try {
       const { data, errors } = await mutation({
-        variables: { data: payload }
+        variables: { data: payload },
+        updateQueries: {
+          getMyLocations: (prev, { mutationResult }) => {
+            const newLocation = mutationResult.data?.createLocation;
+            return Object.assign({}, prev, {
+              getMyLocations: prev.getMyLocations.concat(newLocation)
+            });
+          }
+        }
       });
 
       if (!errors && data) return data.createLocation;
@@ -25,7 +34,15 @@ class LocationsService {
   async updateLocation({ mutation, payload }: IUpdateLocationServiceParams) {
     try {
       const { data, errors } = await mutation({
-        variables: { data: payload }
+        variables: { data: payload },
+        updateQueries: {
+          getMyLocations: (prev, { mutationResult }) => {
+            const updatedLocation = mutationResult.data?.updateLocation;
+            return prev.getMyLocations.map((location: Location) =>
+              location.id === updatedLocation?.id ? updatedLocation : location
+            );
+          }
+        }
       });
 
       if (!errors && data) return data.updateLocation;
@@ -40,7 +57,16 @@ class LocationsService {
   async deleteLocation({ mutation, payload }: IDeleteLocationServiceParams) {
     try {
       const { data, errors } = await mutation({
-        variables: { id: payload.id }
+        variables: { id: payload.id },
+        updateQueries: {
+          getMyLocations: prev => {
+            return Object.assign({}, prev, {
+              getMyLocations: prev.getMyLocations.filter(
+                (location: Location) => location.id !== payload.id
+              )
+            });
+          }
+        }
       });
 
       if (!errors && data) return data.deleteLocation;
@@ -51,36 +77,6 @@ class LocationsService {
       throw new Error(error.message);
     }
   }
-
-  // async getLocations({ query, payload }: IUpdateLocationServiceParams) {
-  //   try {
-  //     const { data, errors } = await query({
-  //       variables: { data: payload }
-  //     });
-
-  //     if (!errors && data) return data.getLocations;
-
-  //     throw new Error(errors?.map(error => error.message).join('\n'));
-  //   } catch (err) {
-  //     const error = err as GraphQLError;
-  //     throw new Error(error.message);
-  //   }
-  // }
-
-  // async getLocationById({ query, payload }: IUpdateLocationServiceParams) {
-  //   try {
-  //     const { data, errors } = await query({
-  //       variables: { data: payload }
-  //     });
-
-  //     if (!errors && data) return data.getLocation;
-
-  //     throw new Error(errors?.map(error => error.message).join('\n'));
-  //   } catch (err) {
-  //     const error = err as GraphQLError;
-  //     throw new Error(error.message);
-  //   }
-  // }
 }
 
 export const locationsService = new LocationsService();

@@ -7,9 +7,3 @@ export interface ICarouselProps extends SwiperProps {
   withOutNavigation?: boolean;
   allowTouchMove: boolean;
 }
-
-/**
- * ------------------------------------------------------------------------------------
- * STYLES ATTRIBUTES TYPES 👇🏻👇🏻
- * ------------------------------------------------------------------------------------
- */
