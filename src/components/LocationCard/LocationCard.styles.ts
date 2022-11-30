@@ -1,6 +1,6 @@
 import { Pencil, Trash, ArrowSquareIn } from 'phosphor-react';
 
-import { transparentize } from 'polished';
+import { rgba } from 'polished';
 import styled, { css } from 'styled-components';
 
 import { Button } from 'components/Button';
@@ -80,7 +80,7 @@ export const CardActionsContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   position: absolute;
-  background: ${({ theme }) => transparentize(0.35, theme.colors.tertiary)};
+  background: ${({ theme }) => rgba(theme.colors.tertiary, 0.35)};
   inset: 0;
   opacity: 0;
   transition: all 0.3s linear;
