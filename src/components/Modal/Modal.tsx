@@ -27,3 +27,5 @@ export const Modal = ({ open, onOpenChange, children, forceMount = true }: IModa
     </Dialog.Root>
   );
 };
+
+Modal.displayName = 'ModalComponent';

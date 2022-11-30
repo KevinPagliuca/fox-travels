@@ -6,6 +6,7 @@ export const HomeContentContainer = styled.div`
   flex-direction: column;
   gap: 2rem;
   padding: 0.125rem 2rem 0.125rem 0.5rem;
+  overflow: auto;
 `;
 
 export const TitleWrapper = styled.div`

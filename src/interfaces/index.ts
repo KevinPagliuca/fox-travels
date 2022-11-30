@@ -4,3 +4,4 @@ export * from './travels.interfaces';
 export * from './forms.interfaces';
 export * from './user.interfaces';
 export * from './auth.interfaces';
+export * from './graphql.interfaces';

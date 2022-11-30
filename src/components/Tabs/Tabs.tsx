@@ -57,3 +57,5 @@ export const Tabs = ({
     </S.TabsContainer>
   );
 };
+
+Tabs.displayName = 'TabsComponent';

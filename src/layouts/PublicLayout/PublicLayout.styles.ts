@@ -7,7 +7,7 @@ export const PublicLayoutContainer = styled(LayoutContent)`
   margin: auto;
   width: unset;
   flex: unset;
-  padding: 2rem 1rem;
+  padding: 1rem;
 
   @media (max-width: ${breakpoints.mobile}) {
     width: 100%;
@@ -17,6 +17,5 @@ export const PublicLayoutContainer = styled(LayoutContent)`
 export const PublicLayoutContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
-  overflow: hidden;
+  overflow: auto;
 `;

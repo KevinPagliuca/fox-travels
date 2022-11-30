@@ -42,3 +42,10 @@ export const LayoutContent = styled.div`
     }
   `}
 `;
+
+export const ScrollableContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+`;

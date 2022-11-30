@@ -14,7 +14,7 @@ const hideContent = css`
 export const SidebarContainer = styled.aside`
   display: flex;
   flex-direction: column;
-  width: 18.25rem;
+  min-width: 18.25rem;
   padding: 3.125rem 1.25rem;
   overflow: hidden;
   height: 100%;
@@ -23,6 +23,7 @@ export const SidebarContainer = styled.aside`
   @media (max-width: ${breakpoints.mediumDesktop}) {
     padding: unset;
     width: unset;
+    min-width: unset;
     overflow: unset;
     height: fit-content;
     padding: 1rem 1.5rem 0.5rem;
@@ -76,9 +77,8 @@ export const SidebarHeader = styled.header`
 export const SidebarContent = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: auto;
   height: 100%;
-  padding-right: 1rem;
 
   ${hideContent};
 `;

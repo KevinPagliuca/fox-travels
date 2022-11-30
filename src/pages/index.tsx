@@ -16,3 +16,4 @@ const Dashboard: NextPage<WithSSRAuthResult> = () => {
 
 export const getServerSideProps = withSSRAuth();
 export default Dashboard;
+Dashboard.displayName = 'DashboardPage';

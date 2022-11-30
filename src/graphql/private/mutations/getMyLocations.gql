@@ -1,0 +1,15 @@
+query getMyLocations {
+  getMyLocations {
+    id
+    placeName
+    country
+    city
+    type
+    latitude
+    longitude
+    travels {
+      id
+      title
+    }
+  }
+}

@@ -43,3 +43,5 @@ export const SidebarDrawer = ({
     </Drawer>
   );
 };
+
+SidebarDrawer.displayName = 'SidebarDrawerComponent';

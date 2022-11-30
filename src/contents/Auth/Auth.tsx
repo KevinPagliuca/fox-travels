@@ -27,3 +27,5 @@ export const AuthContent = () => {
     </S.AuthContainer>
   );
 };
+
+AuthContent.displayName = 'AuthContentComponent';

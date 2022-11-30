@@ -51,3 +51,5 @@ export const HomeContent = () => {
     </S.HomeContentContainer>
   );
 };
+
+HomeContent.displayName = 'HomeContentComponent';

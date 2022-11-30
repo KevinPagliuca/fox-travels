@@ -29,7 +29,7 @@ export const Container = styled(motion.div)`
 export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
   height: 100%;
 
   @media (max-width: ${breakpoints.mediumDesktop}) {
@@ -57,6 +57,7 @@ export const CloseButton = styled(Button).attrs({
   position: absolute;
   right: 1rem;
   top: 1rem;
+  z-index: 1;
 
   &:hover,
   &:active {

@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 import { MapboxControlsStyles, MapboxSearchBoxStyles } from './mapboxSearchBox';
+import { ScrollStyles } from './scroll.styles';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -50,4 +51,6 @@ export const GlobalStyle = createGlobalStyle`
 
   ${MapboxSearchBoxStyles};
   ${MapboxControlsStyles};
+  ${ScrollStyles};
+
 `;

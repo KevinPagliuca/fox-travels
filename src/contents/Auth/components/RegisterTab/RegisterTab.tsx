@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { GraphQLError } from 'graphql';
-import { useUserRegisterMutation } from 'graphql/generated/graphql.generated';
+import { useUserRegisterMutation } from 'graphql/generated';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerFormSchema } from 'shared/validations/forms';
@@ -74,3 +74,5 @@ export const RegisterTab = () => {
     </S.RegisterTabContainer>
   );
 };
+
+RegisterTab.displayName = 'RegisterTabComponent';

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { GraphQLError } from 'graphql';
-import { useAuthUserMutation } from 'graphql/generated/graphql.generated';
+import { useAuthUserMutation } from 'graphql/generated';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormSchema } from 'shared/validations/forms';
@@ -81,3 +81,5 @@ export const LoginTab = () => {
     </S.LoginTabContainer>
   );
 };
+
+LoginTab.displayName = 'LoginTabComponent';

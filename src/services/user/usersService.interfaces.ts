@@ -3,7 +3,7 @@ import {
   CreateUserInput,
   UserAuthInput,
   UserRegisterMutationFn
-} from 'graphql/generated/graphql.generated';
+} from 'graphql/generated';
 
 export interface IUserServiceLoginParams {
   mutation: AuthUserMutationFn;

@@ -8,6 +8,59 @@ import * as Apollo from '@apollo/client';
 import type React from 'react';
 import { getApolloClient, ApolloClientContext } from '../../lib/apolloClient';
 
+export async function getServerPageGetMyLocations(
+  options: Omit<Apollo.QueryOptions<Types.GetMyLocationsQueryVariables>, 'query'>,
+  ctx: ApolloClientContext
+) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data = await apolloClient.query<Types.GetMyLocationsQuery>({
+    ...options,
+    query: Operations.GetMyLocationsDocument
+  });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null
+    }
+  };
+}
+export const useGetMyLocations = (
+  optionsFunc?: (
+    router: NextRouter
+  ) => QueryHookOptions<Types.GetMyLocationsQuery, Types.GetMyLocationsQueryVariables>
+) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetMyLocationsDocument, options);
+};
+export type PageGetMyLocationsComp = React.FC<{
+  data?: Types.GetMyLocationsQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetMyLocations =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<Types.GetMyLocationsQuery, Types.GetMyLocationsQueryVariables>
+  ) =>
+  (WrappedComponent: PageGetMyLocationsComp): NextPage =>
+  props => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.GetMyLocationsDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetMyLocations = {
+  getServerPage: getServerPageGetMyLocations,
+  withPage: withPageGetMyLocations,
+  usePage: useGetMyLocations
+};
+
 export async function getServerPageGetAllUsers(
   options: Omit<Apollo.QueryOptions<Types.GetAllUsersQueryVariables>, 'query'>,
   ctx: ApolloClientContext

@@ -61,3 +61,4 @@ export const Drawer = ({
     </S.DrawerContainer>
   );
 };
+Drawer.displayName = 'DrawerComponent';

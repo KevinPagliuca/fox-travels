@@ -1,6 +1,10 @@
 import 'react-toastify/dist/ReactToastify.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import 'swiper/css';
+import 'swiper/css/bundle';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 import React from 'react';
 import { ConfigProvider } from 'react-avatar';
@@ -45,3 +49,4 @@ export default function MyApp({ Component, pageProps }: AppProps<WithApolloProps
     </AuthStoreProvider>
   );
 }
+MyApp.displayName = 'Next.js App.tsx';

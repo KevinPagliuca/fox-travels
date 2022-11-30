@@ -1,0 +1,26 @@
+enum LocationType {
+  AIRPORT
+  PLACE
+}
+
+type UpdateLocationInput {
+  id: String!
+  placeName: String!
+  latitude: Float!
+  type: LocationType!
+  longitude: Float!
+  city: String!
+  country: String!
+}
+
+mutation updateLocation($data: UpdateLocationInput!) {
+  updateLocation(data: $data) {
+    id
+    placeName
+    latitude
+    type
+    longitude
+    city
+    country
+  }
+}

@@ -39,3 +39,5 @@ export const DynamicForm = ({ fields }: IDynamicFormProps) => {
     </>
   );
 };
+
+DynamicForm.displayName = 'DynamicFormComponent';

@@ -2,7 +2,6 @@ import React from 'react';
 
 import Head from 'next/head';
 
-import { Scroll } from 'components/Scroll';
 import { Sidebar } from 'components/Sidebar';
 import { LayoutContainer, LayoutContent } from 'layouts/common';
 
@@ -19,11 +18,13 @@ export const DefaultLayout = ({ children, contentHeader, pageTitle }: IDefaultLa
       )}
       <LayoutContent>
         <Sidebar />
-        <S.LayoutContentWrapper>
+        <S.DefaultLayoutContentWrapper>
           {contentHeader && contentHeader}
-          <Scroll>{children}</Scroll>
-        </S.LayoutContentWrapper>
+          {children}
+        </S.DefaultLayoutContentWrapper>
       </LayoutContent>
     </LayoutContainer>
   );
 };
+
+DefaultLayout.displayName = 'DefaultLayoutComponent';

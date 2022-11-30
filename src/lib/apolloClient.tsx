@@ -12,7 +12,6 @@ import { API_URL, APP_USER_TOKEN } from 'shared/constants';
 
 import { WithSSRAuthResult } from 'utils/withSSRAuth';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type WithApolloProps<T extends object = WithSSRAuthResult> = T & {
   apolloState?: NormalizedCacheObject;
 };

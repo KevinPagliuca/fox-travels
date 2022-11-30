@@ -110,3 +110,5 @@ const MapboxMapComponent = ({ width, height, style, searchAddressInputId }: IMap
 const MapboxMap = memo(MapboxMapComponent);
 export { MapboxMap };
 export default MapboxMap;
+
+MapboxMapComponent.displayName = 'MapboxMapComponent';

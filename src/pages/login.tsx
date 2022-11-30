@@ -20,3 +20,4 @@ const AuthPage: NextPage = () => {
 
 export const getServerSideProps = withSSRPublic();
 export default AuthPage;
+AuthPage.displayName = 'AuthPage';

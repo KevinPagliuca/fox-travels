@@ -1,7 +1,7 @@
 import { ButtonVariantType } from 'components/Button/Button.interface';
 
-export type AdminPanelRegisterButtonsProps<T> = {
+export type ContentManagementRegisterButtonsProps = {
   label: string;
   variant: ButtonVariantType;
-  modalName: T;
+  onOpenModal: () => void;
 };

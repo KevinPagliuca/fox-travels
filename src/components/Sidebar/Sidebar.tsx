@@ -7,16 +7,15 @@ import { useRouter } from 'next/router';
 
 import { useAuthStore } from 'store/Authentication/Auth.store';
 
-import { Scroll } from 'components/Scroll';
 import { SidebarDrawer } from 'components/SidebarDrawer';
 
 import * as S from './Sidebar.styles';
 
 const navigationItems = [
   {
-    name: 'Painel Adm.',
+    name: 'Gestão',
     icon: <Crown size={24} />,
-    href: '/painel-admin',
+    href: '/gestao-de-conteudo',
     isHidden: (isAdmin?: boolean) => !isAdmin
   },
   {
@@ -71,36 +70,34 @@ export const Sidebar = () => {
       </S.SidebarHeader>
 
       <S.SidebarContent>
-        <Scroll>
-          <S.NavigationList>
-            {navigationItems.map(item => {
-              const shouldHidden = item.isHidden?.(isAdmin);
-              const isActive = pathname === item.href;
-              return (
-                <S.NavigationItem
-                  key={item.name}
-                  isActive={isActive}
-                  tabIndex={-1}
-                  isHidden={shouldHidden}
-                >
-                  {isActive ? (
+        <S.NavigationList>
+          {navigationItems.map(item => {
+            const shouldHidden = item.isHidden?.(isAdmin);
+            const isActive = pathname === item.href;
+            return (
+              <S.NavigationItem
+                key={item.name}
+                isActive={isActive}
+                tabIndex={-1}
+                isHidden={shouldHidden}
+              >
+                {isActive ? (
+                  <a tabIndex={0}>
+                    {item.icon}
+                    <span>{item.name}</span>
+                  </a>
+                ) : (
+                  <Link href={isActive ? pathname : item.href}>
                     <a tabIndex={0}>
                       {item.icon}
                       <span>{item.name}</span>
                     </a>
-                  ) : (
-                    <Link href={isActive ? pathname : item.href}>
-                      <a tabIndex={0}>
-                        {item.icon}
-                        <span>{item.name}</span>
-                      </a>
-                    </Link>
-                  )}
-                </S.NavigationItem>
-              );
-            })}
-          </S.NavigationList>
-        </Scroll>
+                  </Link>
+                )}
+              </S.NavigationItem>
+            );
+          })}
+        </S.NavigationList>
       </S.SidebarContent>
 
       <S.SidebarFooter>
@@ -112,3 +109,5 @@ export const Sidebar = () => {
     </S.SidebarContainer>
   );
 };
+
+Sidebar.displayName = 'SidebarComponent';

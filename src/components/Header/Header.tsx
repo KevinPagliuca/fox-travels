@@ -32,3 +32,4 @@ export const Header = () => {
     </S.HeaderContainer>
   );
 };
+Header.displayName = 'HeaderComponent';

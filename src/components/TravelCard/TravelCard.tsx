@@ -27,3 +27,5 @@ export const TravelCard = ({ item, orientation = 'landscape' }: ITravelCardProps
     </S.TravelCardContainer>
   );
 };
+
+TravelCard.displayName = 'TravelCardComponent';

@@ -12,3 +12,5 @@ const sizes = {
 export const Avatar = ({ size = 'medium', ...rest }: IAvatarProps) => {
   return <S.Avatar {...rest} size={sizes[size]} />;
 };
+
+Avatar.displayName = 'AvatarComponent';

@@ -15,9 +15,6 @@ export const TabsOptionsContainer = styled(TabsPrimitive.List)`
   display: flex;
   gap: 2rem;
   margin-bottom: 1rem;
-  position: sticky;
-  top: 0;
-  left: 0;
 
   &:focus {
     box-shadow: none;

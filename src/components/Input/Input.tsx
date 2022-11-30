@@ -46,3 +46,4 @@ const InputComponent: FFR<HTMLInputElement, IInputProps> = (
 
 export const Input = forwardRef(InputComponent);
 export const InputLabel = S.InputLabel;
+InputComponent.displayName = 'InputComponent';

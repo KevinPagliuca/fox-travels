@@ -2,7 +2,6 @@ import React from 'react';
 
 import Head from 'next/head';
 
-import { Scroll } from 'components/Scroll';
 import { LayoutContainer } from 'layouts/common';
 
 import type { IPublicLayoutProps } from './PublicLayout.interfaces';
@@ -17,10 +16,10 @@ export const PublicLayout = ({ children, pageTitle }: IPublicLayoutProps) => {
         </Head>
       )}
       <S.PublicLayoutContainer>
-        <Scroll hideHorizontalScrollbar>
-          <S.PublicLayoutContent>{children}</S.PublicLayoutContent>
-        </Scroll>
+        <S.PublicLayoutContent>{children}</S.PublicLayoutContent>
       </S.PublicLayoutContainer>
     </LayoutContainer>
   );
 };
+
+PublicLayout.displayName = 'PublicLayoutComponent';

@@ -1,7 +1,8 @@
-import { GraphQLError } from 'graphql';
-import { MeQuery } from 'graphql/generated/graphql.generated';
-import { getServerPageMe } from 'graphql/generated/page.generated';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+
+import { GraphQLError } from 'graphql';
+import { MeQuery } from 'graphql/generated';
+import { getServerPageMe } from 'graphql/generated';
 
 import { ApolloError, NormalizedCacheObject } from '@apollo/client';
 import { destroyCookie, parseCookies } from 'nookies';

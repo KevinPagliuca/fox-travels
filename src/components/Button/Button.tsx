@@ -23,3 +23,4 @@ const ButtonComponent: FFR<HTMLButtonElement, IButtonProps> = (
 };
 
 export const Button = forwardRef(ButtonComponent);
+ButtonComponent.displayName = 'ButtonComponent';
