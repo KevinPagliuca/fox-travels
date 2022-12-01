@@ -1,4 +1,4 @@
-import { Pencil, Trash, ArrowSquareIn } from 'phosphor-react';
+import { Copy, Pencil, Trash } from 'phosphor-react';
 
 import { rgba } from 'polished';
 import styled, { css } from 'styled-components';
@@ -13,10 +13,12 @@ export const LocationCardContainer = styled.div`
     border-radius: 4px;
     overflow: hidden;
     padding: 1rem;
-    transition: ${theme.transitions.preset.default};
     gap: 1rem;
     width: 100%;
+    max-width: 25rem;
+    flex: 1;
     position: relative;
+    transition: ${theme.transitions.preset.default};
 
     &:hover {
       box-shadow: 0 0 0 2px ${theme.colors.primary};
@@ -87,6 +89,7 @@ export const CardActionsContainer = styled.div`
 
   &:hover {
     opacity: 1;
+    backdrop-filter: blur(1px);
   }
 `;
 
@@ -100,32 +103,32 @@ export const ButtonAction = styled(Button).attrs({
 
 const iconStyles = css`
   ${({ theme }) => css`
-    color: ${theme.colors.title};
+    color: ${theme.colors.tertiary};
+    background: ${theme.colors.white};
     transition: ${theme.transitions.preset.default};
+    border-radius: 8px;
+    padding: 0.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
     cursor: pointer;
+    box-shadow: 0 0 4px 0 ${rgba(theme.colors.white, 0.5)};
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.tertiary};
+      background: ${({ theme }) => theme.colors.primary};
+    }
   `}
 `;
 
 export const EditIcon = styled(Pencil)`
-  ${iconStyles}
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.warning};
-  }
+  ${iconStyles};
 `;
 
 export const DeleteIcon = styled(Trash)`
-  ${iconStyles}
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.secondary};
-  }
+  ${iconStyles};
 `;
 
-export const OpenLinkIcon = styled(ArrowSquareIn)`
-  ${iconStyles}
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-  }
+export const CopyIcon = styled(Copy)`
+  ${iconStyles};
 `;

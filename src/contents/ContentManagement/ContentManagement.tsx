@@ -1,13 +1,16 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Link from 'next/link';
 
-import { useGetMyLocations } from 'graphql/generated';
+import { GraphQLError } from 'graphql';
+import { useDeleteLocationMutation, useGetMyLocations } from 'graphql/generated';
 
 import { Carousel } from 'components/Carousel';
 import { LocationCard } from 'components/LocationCard';
 
 import { LocationWithoutTravels } from 'interfaces';
+import { locationsService } from 'services/locations/locations.service';
 
 import { AirportModal } from './components/AirportModal';
 import { ContentManagementRegisterButtonsProps } from './ContentManagement.interfaces';
@@ -21,6 +24,7 @@ const airportInitialState = {
 export const ContentManagementContent = () => {
   const [airportModal, setAirportModal] = useState(airportInitialState);
   const { data } = useGetMyLocations();
+  const [handleDeleteLocation] = useDeleteLocationMutation();
 
   const onAirportModalOpenChange = useCallback((content?: LocationWithoutTravels) => {
     setAirportModal(prevState => ({
@@ -35,6 +39,19 @@ export const ContentManagementContent = () => {
 
   const onOpenEditAirportModal = useCallback((location: LocationWithoutTravels) => {
     onAirportModalOpenChange(location);
+  }, []);
+
+  const onDeleteAirport = useCallback(async (locationId: string) => {
+    try {
+      await locationsService.deleteLocation({
+        mutation: handleDeleteLocation,
+        payload: { id: locationId }
+      });
+      toast.success('The airport has been deleted.');
+    } catch (err) {
+      const error = err as GraphQLError;
+      toast.error(error.message);
+    }
   }, []);
 
   const RegisterButtons: ContentManagementRegisterButtonsProps[] = [
@@ -53,7 +70,12 @@ export const ContentManagementContent = () => {
   const locationCardMap = useMemo(() => {
     return data?.getMyLocations
       ? data.getMyLocations.map(airport => (
-          <LocationCard key={airport.id} location={airport} onEdit={onOpenEditAirportModal} />
+          <LocationCard
+            key={airport.id}
+            location={airport}
+            onEdit={onOpenEditAirportModal}
+            onDelete={onDeleteAirport}
+          />
         ))
       : [];
   }, [data?.getMyLocations]);
@@ -81,6 +103,7 @@ export const ContentManagementContent = () => {
             <S.SectionSeAll>Ver todos</S.SectionSeAll>
           </Link>
         </S.SectionHeaderContainer>
+
         <Carousel
           id="airports_carousel"
           slidesPerView={3}

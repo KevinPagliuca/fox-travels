@@ -1,13 +1,21 @@
 import { Airplane, MapPin } from 'phosphor-react';
-import React from 'react';
+import React, { useCallback, memo } from 'react';
+import { toast } from 'react-toastify';
 
 import { LocationTypeEnum } from 'graphql/generated';
+
+import { isDifferent } from 'utils/objects';
 
 import { ILocationCardProps } from './LocationCard.interfaces';
 import * as S from './LocationCard.styles';
 
-export const LocationCard = ({ location, onEdit }: ILocationCardProps) => {
+const LocationCardComponent = ({ location, onEdit, onDelete }: ILocationCardProps) => {
   const isAirport = location.type === LocationTypeEnum.Airport;
+
+  const handleCopyAirportName = useCallback(() => {
+    navigator.clipboard.writeText(location.placeName);
+    toast.success('The airport name has been copied to your clipboard.');
+  }, [location]);
 
   return (
     <S.LocationCardContainer tabIndex={0}>
@@ -27,13 +35,22 @@ export const LocationCard = ({ location, onEdit }: ILocationCardProps) => {
       </S.LocationCardContent>
 
       <S.CardActionsContainer>
-        <S.ButtonAction title={isAirport ? 'Editar aeroporto' : 'Editar local'}>
+        <S.ButtonAction
+          title={isAirport ? 'Editar aeroporto' : 'Editar local'}
+          onClick={() => onEdit(location)}
+        >
           <S.EditIcon size={32} />
         </S.ButtonAction>
-        <S.ButtonAction title="Abrir" onClick={() => onEdit(location)}>
-          <S.OpenLinkIcon size={32} />
+        <S.ButtonAction
+          title={isAirport ? 'Copiar nome do aeroporto' : 'Copiar nome do local'}
+          onClick={handleCopyAirportName}
+        >
+          <S.CopyIcon size={32} />
         </S.ButtonAction>
-        <S.ButtonAction title={isAirport ? 'Deletar aeroporto' : 'Deletar local'}>
+        <S.ButtonAction
+          title={isAirport ? 'Deletar aeroporto' : 'Deletar local'}
+          onClick={() => onDelete(location.id)}
+        >
           <S.DeleteIcon size={32} />
         </S.ButtonAction>
       </S.CardActionsContainer>
@@ -41,4 +58,8 @@ export const LocationCard = ({ location, onEdit }: ILocationCardProps) => {
   );
 };
 
-LocationCard.displayName = 'LocationCardComponent';
+export const LocationCard = memo(LocationCardComponent, (prevProps, nextProps) => {
+  return isDifferent(prevProps.location, nextProps.location);
+});
+
+LocationCardComponent.displayName = 'LocationCardComponent';

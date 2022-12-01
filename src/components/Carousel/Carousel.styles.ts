@@ -32,6 +32,10 @@ const paginationBulletStyles = css`
   }
 `;
 
+export const CarouselWrapper = styled.div`
+  flex: 1;
+  width: 100%;
+`;
 export const CarouselContainer = styled(Swiper)`
   position: relative;
 
@@ -46,7 +50,6 @@ export const CarouselContainer = styled(Swiper)`
 
   .swiper-slide {
     display: flex;
-    flex-grow: 1;
     height: unset;
   }
 
